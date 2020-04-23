@@ -1,5 +1,36 @@
+body {
+  display: flex;
+  justify-content: center;
+  padding: 10px
+}
+
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  border: 3px outset lightgrey;
+  width: 164px;
+  height: 206px;
+  background-color: linen;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  padding: 5px
+}
+
+.cell {
+  width: 16px;
+  height: 16px;
+  background-color: lightskyblue;
+  box-sizing: border-box;
+  border: 1px outset lightblue;
+  font-size: 10px;
+}
+
+.revealed {
+  background-color: cornflowerblue;
 }
 
 .App-logo {
