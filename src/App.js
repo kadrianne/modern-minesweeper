@@ -5,14 +5,14 @@ import Board from './components/Board';
 
 class App extends React.Component {
   state = {
-    newGame: true
+    game: ['X',null,null,null,null,null,null,'X',null]
   }
 
   render(){
     return (
       <div className="App">
         <Header />
-        <Board />
+        <Board game={this.state.game}/>
       </div>
     )
   }

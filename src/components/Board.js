@@ -1,11 +1,10 @@
 import React from 'react'
 import Cell from './Cell'
 
-export default function Board(){
-    const game = ['X',null,null,null,null,null,null,'X',null]
+export default function Board(props){
 
     const setupBoard = () => {
-        return game.map(piece => {
+        return props.game.map(piece => {
             return <Cell mine={piece} />
         })
     }
