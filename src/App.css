@@ -8,21 +8,22 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 3px outset lightgrey;
-  width: 164px;
-  height: 206px;
+  border: 3px outset lightskyblue;
+  width: 180px;
+  height: 242px;
   background-color: linen;
 }
 
 .board {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  padding: 5px
+  padding-top: 5px
 }
 
 .cell {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background-color: lightskyblue;
   box-sizing: border-box;
   border: 1px outset lightblue;
@@ -30,7 +31,15 @@ body {
 }
 
 .revealed {
-  background-color: cornflowerblue;
+  border-width: 1px 1px 0px 0px;
+  border-style: solid;
+  border-color: lightskyblue;
+  background-color: lightgrey;
+}
+
+.pressed {
+  border: 0px;
+  background-color: lightgrey;
 }
 
 .App-logo {

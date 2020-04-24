@@ -13,7 +13,28 @@ export default class Cell extends React.Component {
         })
     }
 
+    pressedCell = () => {
+        return this.setState({
+            classNames: 'cell revealed'
+        })
+    }
+
+    resetCell = () => {
+        return this.setState({
+            classNames: 'cell'
+        })
+    }
+
     render(){
-        return <div className={this.state.classNames} onClick={this.clickedCell}>{this.props.mine}</div>
+        return (
+            <div className={this.state.classNames} 
+                onMouseDown={this.pressedCell} 
+                onMouseOut={this.state.revealed === true 
+                    ? null 
+                    : this.resetCell} 
+                onMouseUpCapture={this.clickedCell}>
+                    {this.props.x},{this.props.y}
+            </div>
+        )
     }
 }
