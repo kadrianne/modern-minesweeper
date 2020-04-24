@@ -1,31 +1,31 @@
 import React from 'react'
 import Cell from './Cell'
 
-export default function Board(props){
+export default class Board extends React.Component {
 
-    const grid = []
-    const rows = 9
-    const columns = 9
-    // const mines = 10
-
-    const setupBoard = () => {
+    state = {
+        mines: 10
+    }
+    
+    setupBoard = () => {
+        let grid = []
+        const rows = 9
+        const columns = 9
         for (let i = 1; i <= rows; i++){
             let row = []
             for (let j = 1; j <= columns; j++){
-                row.push(<Cell x={i} y={j} />)
+                row.push(<Cell x={i} y={j} value='💣' />)
             }
             grid.push(row)
         }
-        console.log(grid)
         return grid
-        // return props.game.map(piece => {
-            
-        // })
     }
 
-    return (
-        <main className="board">
-            {setupBoard()}
-        </main>
-    )
+    render(){
+        return (
+            <main className="board">
+                {this.setupBoard()}
+            </main>
+        )
+    }
 }

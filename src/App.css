@@ -37,6 +37,10 @@ body {
   background-color: lightgrey;
 }
 
+.mine {
+  background-image: url('./bomb.png');
+}
+
 .pressed {
   border: 0px;
   background-color: lightgrey;

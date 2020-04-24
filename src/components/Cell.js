@@ -7,10 +7,14 @@ export default class Cell extends React.Component {
     }
 
     clickedCell = () => {
-        return this.setState({
+        this.setState({
             revealed: true, 
             classNames: 'cell revealed'
         })
+    }
+
+    showValue = () => {
+        return (this.state.revealed == true) ? this.props.value : null
     }
 
     pressedCell = () => {
@@ -33,7 +37,7 @@ export default class Cell extends React.Component {
                     ? null 
                     : this.resetCell} 
                 onMouseUpCapture={this.clickedCell}>
-                    {this.props.x},{this.props.y}
+                    {this.showValue()}
             </div>
         )
     }
