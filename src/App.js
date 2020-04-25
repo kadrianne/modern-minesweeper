@@ -5,11 +5,22 @@ import Board from './components/Board';
 
 class App extends React.Component {
   state = {
-    gameState: 'New'
+    gameState: 'new',
+    rows: 9,
+    columns: 9
   }
 
   createBoard = () => {
-    const board = ['X',null,null,null,null,null,null,'X',null]
+    let board = []
+
+    for (let i = 1; i <= this.state.rows; i++){
+      let row = []
+      for (let j = 1; j <= this.state.columns; j++){
+          row.push(null)
+      }
+      board.push(row)
+    }
+
     return board
   }
 
@@ -17,7 +28,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Board board={this.createBoard}/>
+        <Board board={this.createBoard()} rows={this.state.rows} columns={this.state.columns}/>
       </div>
     )
   }

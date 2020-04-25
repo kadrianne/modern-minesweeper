@@ -28,7 +28,7 @@ export default class Cell extends React.Component {
     }
 
     showValue = () => {
-        return (this.state.revealed == true) ? this.props.value : null
+        return (this.state.revealed === true) ? this.props.value : null
     }
 
     pressedCell = (event) => {
@@ -47,7 +47,8 @@ export default class Cell extends React.Component {
 
     render(){
         return (
-            <div className={this.state.classNames} 
+            <div className={this.state.classNames}
+                id={`${this.props.x}-${this.props.y}`}
                 onMouseDown={this.state.flagged === true ? null : this.pressedCell} 
                 onMouseOut={this.state.revealed === true ? null : this.resetCell} 
                 onClick={this.state.flagged === true ? null : this.clickedCell}
