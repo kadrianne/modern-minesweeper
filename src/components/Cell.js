@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
-        revealed: false,
+        revealed: true,
         classNames: 'cell'
     }
 
@@ -14,7 +14,7 @@ export default class Cell extends React.Component {
     }
 
     showValue = () => {
-        return (this.state.revealed == true) ? this.props.value : null
+        return (this.state.revealed === true) ? this.props.value : null
     }
 
     pressedCell = () => {
@@ -31,7 +31,8 @@ export default class Cell extends React.Component {
 
     render(){
         return (
-            <div className={this.state.classNames} 
+            <div className={this.state.classNames}
+                id={`${this.props.x}-${this.props.y}`}
                 onMouseDown={this.pressedCell} 
                 onMouseOut={this.state.revealed === true 
                     ? null 
