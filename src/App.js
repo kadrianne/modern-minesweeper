@@ -26,13 +26,10 @@ class App extends React.Component {
 
   render(){
     return (
-      <>
       <div className="App">
         <Header />
         <Board board={this.createBoard()} rows={this.state.rows} columns={this.state.columns}/>
       </div>
-      <footer>Icons made by <a href="https://www.flaticon.com/authors/creaticca-creative-agency" title="Creaticca Creative Agency">Creaticca Creative Agency</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></footer>
-      </>
     )
   }
 }

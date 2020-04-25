@@ -28,6 +28,7 @@ body {
   box-sizing: border-box;
   border: 1px outset lightblue;
   font-size: 10px;
+  cursor: default;
 }
 
 .revealed {
@@ -35,10 +36,6 @@ body {
   border-style: solid;
   border-color: lightskyblue;
   background-color: lightgrey;
-}
-
-.mine {
-  background-image: url('./bomb.png');
 }
 
 .pressed {
