@@ -5,18 +5,20 @@ import Board from './components/Board';
 
 class App extends React.Component {
   state = {
-    game: ['X',null,null,null,null,null,null,'X',null]
+    gameState: 'New'
+  }
+
+  createBoard = () => {
+    const board = ['X',null,null,null,null,null,null,'X',null]
+    return board
   }
 
   render(){
     return (
-      <>
       <div className="App">
         <Header />
-        <Board game={this.state.game}/>
+        <Board board={this.createBoard}/>
       </div>
-      <footer>Icons made by <a href="https://www.flaticon.com/authors/creaticca-creative-agency" title="Creaticca Creative Agency">Creaticca Creative Agency</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></footer>
-      </>
     )
   }
 }
