@@ -9,8 +9,22 @@ export default class Board extends React.Component {
         boardState: []
     }
 
+    createBoard = () => {
+        let board = []
+    
+        for (let i = 1; i <= this.props.rows; i++){
+          let row = []
+          for (let j = 1; j <= this.props.columns; j++){
+              row.push(null)
+          }
+          board.push(row)
+        }
+
+        return board
+    }
+
     renderBoard = (rows,columns) => {
-        let renderedBoard = this.props.board
+        let renderedBoard = this.createBoard()
         
         for (let i = 1; i <= rows; i++){
             for (let j = 1; j <= columns; j++){
@@ -23,31 +37,31 @@ export default class Board extends React.Component {
         while (mines > 0){
             let i = getRandomInteger(1,rows)
             let j = getRandomInteger(1,columns)
-    
-            if (!minePositions.some(position => position == `${i},${j}`)) {
+            
+            if (!minePositions.some(position => position === `${i},${j}`)) {
                 renderedBoard[i-1][j-1] = <Cell x={i} y={j} value='💣' />
                 minePositions.push(`${i},${j}`)
                 mines--
             }
         }
-        
+
         return renderedBoard
     }
     
     componentDidMount(){
-        let updatedBoardState = this.props.board.map(row => {
-            return row.map(cell => {
-                if (cell.props.value == '💣'){
-                    return 'mine'
-                } else {
-                    return null
-                }
-            })
-        })
+        // let updatedBoardState = this.renderBoard().map(row => {
+        //     return row.map(cell => {
+        //         if (cell.props.value == '💣'){
+        //             return 'mine'
+        //         } else {
+        //             return null
+        //         }
+        //     })
+        // })
 
-        this.setState({
-            boardState: updatedBoardState
-        })
+        // this.setState({
+        //     boardState: updatedBoardState
+        // })
     }
 
     render(){

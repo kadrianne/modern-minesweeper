@@ -2,7 +2,7 @@ import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
-        revealed: false,
+        revealed: true,
         flagged: false,
         classNames: 'cell'
     }
@@ -10,13 +10,13 @@ export default class Cell extends React.Component {
     clickedCell = (event) => {
         event.preventDefault()
         
-        if (event.nativeEvent.which == 1){
+        if (event.nativeEvent.which === 1){
             this.setState({
                 revealed: true, 
                 flagged: false,
                 classNames: 'cell revealed'
             })
-        } else if (event.nativeEvent.which == 3){
+        } else if (event.nativeEvent.which === 3){
             this.flag()
         }
     }
@@ -32,7 +32,7 @@ export default class Cell extends React.Component {
     }
 
     pressedCell = (event) => {
-        if (event.nativeEvent.which == 1){
+        if (event.nativeEvent.which === 1){
             return this.setState({
                 classNames: 'cell revealed'
             })
@@ -54,7 +54,7 @@ export default class Cell extends React.Component {
                 onClick={this.state.flagged === true ? null : this.clickedCell}
                 onContextMenu={this.state.revealed === true ? null : this.clickedCell}
             >
-                {this.state.flagged == true ? '❗️' : null}
+                {this.state.flagged === true ? '❗️' : null}
                 {this.showValue()}
             </div>
         )

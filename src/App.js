@@ -11,24 +11,6 @@ class App extends React.Component {
     boardClass: 'small-board'
   }
 
-  createBoard = () => {
-    let board = []
-
-    for (let i = 1; i <= this.state.rows; i++){
-      let row = []
-      for (let j = 1; j <= this.state.columns; j++){
-          row.push(null)
-      }
-      board.push(row)
-    }
-
-    return board
-  }
-
-  newGame = () => {
-
-  }
-
   changeGameState = () => {
     this.setState({
       gameState: 'new'
@@ -39,7 +21,7 @@ class App extends React.Component {
     return (
       <div className={this.state.boardClass}>
         <Header changeGameState={this.changeGameState} />
-        <Board board={this.createBoard()} rows={this.state.rows} columns={this.state.columns} />
+        <Board rows={this.state.rows} columns={this.state.columns} />
       </div>
     )
   }
