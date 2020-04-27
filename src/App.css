@@ -4,14 +4,23 @@ body {
   padding: 10px
 }
 
-.App {
+.small-board {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 3px outset lightskyblue;
+  border: 3px outset hsl(190,80%,65%);
   width: 180px;
   height: 242px;
   background-color: linen;
+}
+
+button {
+  width: 30px;
+  height: 30px;
+  background-color: hsl(110,80%,50%);
+  box-sizing: border-box;
+  border: 1px outset hsl(110,80%,80%);
+  margin: 5px
 }
 
 .board {
@@ -24,9 +33,9 @@ body {
 .cell {
   width: 20px;
   height: 20px;
-  background-color: lightskyblue;
+  background-color: hsl(190,80%,50%);
   box-sizing: border-box;
-  border: 1px outset lightblue;
+  border: 1px outset hsl(190,80%,80%);
   font-size: 10px;
   cursor: default;
 }
@@ -34,46 +43,11 @@ body {
 .revealed {
   border-width: 1px 1px 0px 0px;
   border-style: solid;
-  border-color: lightskyblue;
+  border-color: hsl(190,80%,50%);
   background-color: lightgrey;
 }
 
 .pressed {
   border: 0px;
   background-color: lightgrey;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
