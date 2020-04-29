@@ -30,24 +30,35 @@ export default class Board extends React.Component {
         return adjacentMines
     }
 
-    revealCell = (i,j) => {
-        const cellState = this.state.boardState[i-1][j-1]
+    revealCell = (x,y) => {
+        const cellState = this.state.boardState[x][x]
         if (cellState == 'mine'){
             console.log('mine')
         } else {
-            this.countMines(i-1,j-1)
+            this.countMines(x,y)
         }
     }
 
     renderBoard = (rows,columns) => {
-        let renderedBoard = this.props.board
-        
-        for (let i = 1; i <= rows; i++){
-            for (let j = 1; j <= columns; j++){
-                renderedBoard[i-1][j-1] = <Cell i={i} j={j} value='' revealCell={this.revealCell} />
-            }
-        }
-        
+        let x = -1
+        return this.state.boardState.map(row => {
+            x++
+            let y = 0
+            return row.map(cell => {
+                y++
+                if (cell == null){
+                    return <Cell x={x} y={y} value='' revealCell={this.revealCell} />
+                } else {
+                    return <Cell x={x} y={y} value='💣' revealCell={this.revealCell} />
+                }
+            })
+        })
+    }
+ 
+    componentDidMount(){
+        const {rows,columns,board} = this.props
+        const updatedBoardState = board
+
         let mines = 10
         let minePositions = []
         while (mines > 0){
@@ -55,25 +66,11 @@ export default class Board extends React.Component {
             let j = getRandomInteger(1,columns)
     
             if (!minePositions.some(position => position == `${i},${j}`)) {
-                renderedBoard[i-1][j-1] = <Cell x={i} y={j} value='💣' revealCell={this.revealCell} />
+                updatedBoardState[i-1][j-1] = 'mine'
                 minePositions.push(`${i},${j}`)
                 mines--
             }
         }
-        
-        return renderedBoard
-    }
-    
-    componentDidMount(){
-        let updatedBoardState = this.props.board.map(row => {
-            return row.map(cell => {
-                if (cell.props.value == '💣'){
-                    return 'mine'
-                } else {
-                    return null
-                }
-            })
-        })
 
         this.setState({
             boardState: updatedBoardState
