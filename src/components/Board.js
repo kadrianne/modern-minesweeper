@@ -48,14 +48,28 @@ export default class Board extends React.Component {
                     7: 'black',
                     8: 'yellow'
                 }
-                return <Cell x={x} y={y} value={cell} iconClass={cellClass[cell]} />
+                return <Cell x={x} y={y} value={cell} iconClass={cellClass[cell]} startGame={this.props.startGame} />
             })
         })
     }
  
+    createBoard = (rows,columns) => {
+        let board = []
+
+        for (let i = 1; i <= rows; i++){
+            let row = []
+            for (let j = 1; j <= columns; j++){
+                row.push(null)
+            }
+            board.push(row)
+        }
+
+        return board
+    }
+
     componentDidMount(){
-        const {rows,columns,board} = this.props
-        const updatedBoardValues = board
+        const {rows,columns} = this.props
+        const updatedBoardValues = this.createBoard(rows,columns)
 
         let mines = 10
         let minePositions = []
