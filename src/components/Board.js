@@ -6,10 +6,10 @@ export default class Board extends React.Component {
 
     state = {
         mines: 10,
-        boardState: []
+        boardValues: []
     }
 
-    countMines = (x,y) => {
+    countMines = (x,y,updatedBoardValues) => {
         const rows = [x-1,x,x+1]
         const cols = [y-1,y,y+1]
         let adjacentMines = 0
@@ -18,7 +18,7 @@ export default class Board extends React.Component {
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (this.state.boardState[row][col] == 'mine'){
+                        if (updatedBoardValues[row][col] == '💣'){
                             adjacentMines++
                         }
                     }
@@ -26,38 +26,36 @@ export default class Board extends React.Component {
             }
         })
 
-        console.log(adjacentMines)
         return adjacentMines
-    }
-
-    revealCell = (x,y) => {
-        const cellState = this.state.boardState[x][y]
-        if (cellState == 'mine'){
-            console.log('mine')
-        } else {
-            this.countMines(x,y)
-        }
     }
 
     renderBoard = (rows,columns) => {
         let x = -1
-        return this.state.boardState.map(row => {
+        return this.state.boardValues.map(row => {
             x++
             let y = -1
             return row.map(cell => {
                 y++
-                if (cell == null){
-                    return <Cell x={x} y={y} value='' revealCell={this.revealCell} />
-                } else {
-                    return <Cell x={x} y={y} value='💣' revealCell={this.revealCell} />
+                const cellClass = {
+                    '💣': 'bomb',
+                    0: 'zero',
+                    1: 'blue',
+                    2: 'green',
+                    3: 'red',
+                    4: 'purple',
+                    5: 'magenta',
+                    6: 'turquoise',
+                    7: 'black',
+                    8: 'yellow'
                 }
+                return <Cell x={x} y={y} value={cell} iconClass={cellClass[cell]} />
             })
         })
     }
  
     componentDidMount(){
         const {rows,columns,board} = this.props
-        const updatedBoardState = board
+        const updatedBoardValues = board
 
         let mines = 10
         let minePositions = []
@@ -66,14 +64,22 @@ export default class Board extends React.Component {
             let j = getRandomInteger(1,columns)
     
             if (!minePositions.some(position => position == `${i},${j}`)) {
-                updatedBoardState[i-1][j-1] = 'mine'
+                updatedBoardValues[i-1][j-1] = '💣'
                 minePositions.push(`${i},${j}`)
                 mines--
             }
         }
 
+        for (let x = 0; x < rows; x++){
+            for (let y = 0; y < columns; y++){
+                if (updatedBoardValues[x][y] != '💣'){
+                    updatedBoardValues[x][y] = this.countMines(x,y,updatedBoardValues)
+                }
+            }
+        }
+
         this.setState({
-            boardState: updatedBoardState
+            boardValues: updatedBoardValues
         })
     }
 

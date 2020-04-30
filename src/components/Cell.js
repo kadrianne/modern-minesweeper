@@ -2,9 +2,9 @@ import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
-        revealed: true,
+        revealed: false,
         flagged: false,
-        classNames: 'cell'
+        classNames: `cell`
     }
 
     clickedCell = (event) => {
@@ -19,14 +19,6 @@ export default class Cell extends React.Component {
         }
     }
 
-    handleClick = (event) => {
-        event.preventDefault()
-        const {x,y,revealCell} = this.props
-        
-        revealCell(x,y)
-        this.clickedCell(event)
-    }
-
     flag = () => {
         this.setState(previousState => ({
             flagged: !previousState.flagged
@@ -34,7 +26,11 @@ export default class Cell extends React.Component {
     }
 
     showValue = () => {
-        return (this.state.revealed === true) ? this.props.value : null
+        return (
+            (this.state.revealed === true)
+            ? <span class={this.props.iconClass}>{this.props.value}</span> 
+            : null
+        )
     }
 
     pressedCell = (event) => {
@@ -57,7 +53,7 @@ export default class Cell extends React.Component {
                 id={`${this.props.x}-${this.props.y}`}
                 onMouseDown={this.state.flagged === true ? null : this.pressedCell} 
                 onMouseOut={this.state.revealed === true ? null : this.resetCell} 
-                onClick={this.state.flagged === true ? null : this.handleClick}
+                onClick={this.state.flagged === true ? null : this.clickedCell}
                 onContextMenu={this.state.revealed === true ? null : this.clickedCell}
             >
                 {this.state.flagged == true ? '❗️' : null}
