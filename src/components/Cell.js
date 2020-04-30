@@ -65,10 +65,6 @@ export default class Cell extends React.Component {
         })
     }
 
-    componentDidUpdate(){
-        
-    }
-
     render(){
         return (
             <div className={this.state.revealed === true ? 'cell revealed' : 'cell'}

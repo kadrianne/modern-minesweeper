@@ -28,8 +28,13 @@ export default class Board extends React.Component {
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (this.state.boardValues[row][col] !== '💣'){
-                            updatedCellState[row][col] = true
+                        if (this.state.cellStates[row][col] == false){
+                            if (this.state.boardValues[row][col] == '0'){
+                                updatedCellState[row][col] = true
+                                this.checkAdjacentCells(row,col)
+                            } else if (this.state.boardValues[row][col] !== '💣'){
+                                updatedCellState[row][col] = true
+                            }
                         }
                     }
                 })
