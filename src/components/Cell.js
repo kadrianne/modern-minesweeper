@@ -4,12 +4,10 @@ export default class Cell extends React.Component {
     state = {
         revealed: false,
         flagged: false,
-        classNames: 'cell'
+        classNames: `cell`
     }
 
     clickedCell = (event) => {
-        event.preventDefault()
-        
         if (event.nativeEvent.which == 1){
             this.setState({
                 revealed: true, 
@@ -28,7 +26,11 @@ export default class Cell extends React.Component {
     }
 
     showValue = () => {
-        return (this.state.revealed === true) ? this.props.value : null
+        return (
+            (this.state.revealed === true)
+            ? <span class={this.props.iconClass}>{this.props.value}</span> 
+            : null
+        )
     }
 
     pressedCell = (event) => {
