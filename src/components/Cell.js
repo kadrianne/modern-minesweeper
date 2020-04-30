@@ -2,19 +2,21 @@ import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
-        revealed: this.props.revealed,
+        // revealed: this.props.revealed,
         flagged: false
         // classNames: `cell`
     }
 
-    componentWillReceiveProps({revealed}){
-        this.setState({revealed})
-    }
+    // componentWillReceiveProps({revealed}){
+    //     this.setState({revealed})
+    // }
 
     checkValue = () => {
-        const {x,y,value,checkAdjacentCells} = this.props
+        const {x,y,value,checkAdjacentCells,lostGame} = this.props
         if (value == '0'){
             checkAdjacentCells(x,y)
+        } else if (value == '💣'){
+            lostGame()
         }
     }
 
@@ -24,7 +26,7 @@ export default class Cell extends React.Component {
         
         if (event.nativeEvent.which === 1){
             this.setState({
-                revealed: true, 
+                // revealed: true, 
                 flagged: false,
                 // classNames: 'cell revealed'
             })
@@ -45,7 +47,7 @@ export default class Cell extends React.Component {
 
     showValue = () => {
         return (
-            (this.state.revealed === true)
+            (this.props.revealed === true)
             ? <span class={this.props.iconClass}>{this.props.value}</span> 
             : null
         )
@@ -67,12 +69,12 @@ export default class Cell extends React.Component {
 
     render(){
         return (
-            <div className={this.state.revealed === true ? 'cell revealed' : 'cell'}
+            <div className={`cell ${this.props.revealed === true ? `revealed` : null}`}
                 id={`${this.props.x}-${this.props.y}`}
                 // onMouseDown={this.state.flagged === true ? null : this.pressedCell} 
-                onMouseOut={this.state.revealed === true ? null : this.resetCell} 
+                onMouseOut={this.props.revealed === true ? null : this.resetCell} 
                 onClick={this.state.flagged === true ? null : this.clickedCell}
-                onContextMenu={this.state.revealed === true ? null : this.clickedCell}
+                onContextMenu={this.props.revealed === true ? null : this.clickedCell}
             >
                 {this.state.flagged === true ? '❗️' : null}
                 {this.showValue()}
