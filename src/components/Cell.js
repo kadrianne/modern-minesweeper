@@ -4,7 +4,7 @@ export default class Cell extends React.Component {
     state = {
         revealed: true,
         flagged: false,
-        classNames: 'cell'
+        classNames: `cell`
     }
 
     clickedCell = (event) => {
@@ -28,7 +28,11 @@ export default class Cell extends React.Component {
     }
 
     showValue = () => {
-        return (this.state.revealed === true) ? this.props.value : null
+        return (
+            (this.state.revealed === true)
+            ? <span class={this.props.iconClass}>{this.props.value}</span> 
+            : null
+        )
     }
 
     pressedCell = (event) => {

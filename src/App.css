@@ -43,11 +43,62 @@ button {
 .revealed {
   border-width: 1px 1px 0px 0px;
   border-style: solid;
-  border-color: hsl(190,80%,50%);
-  background-color: lightgrey;
+  border-color: linen;
+  background-color: rgb(199, 228, 247);
 }
 
 .pressed {
   border: 0px;
   background-color: lightgrey;
+}
+
+.red {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(201, 65, 65)
+}
+
+.blue {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(0, 123, 223)
+}
+
+.green {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(64, 191, 96)
+}
+
+.purple {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(92, 64, 191)
+}
+
+.black {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000
+}
+
+.magenta {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(179, 40, 125)
+}
+
+.yellow {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(192, 170, 63)
+}
+
+.turquoise {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(34, 165, 154)
+}
+.zero {
+  display: none;
 }
