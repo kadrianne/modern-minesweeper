@@ -2,20 +2,33 @@ import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
-        revealed: true,
-        flagged: false,
-        classNames: `cell`
+        revealed: this.props.revealed,
+        flagged: false
+        // classNames: `cell`
+    }
+
+
+    checkValue = () => {
+        const {x,y,value,checkAdjacentCells} = this.props
+        if (value == '0'){
+            checkAdjacentCells(x,y)
+        }
     }
 
     clickedCell = (event) => {
         event.preventDefault()
+        const {x,y,updateCellStates} = this.props
         
         if (event.nativeEvent.which === 1){
             this.setState({
                 revealed: true, 
                 flagged: false,
-                classNames: 'cell revealed'
+                // classNames: 'cell revealed'
             })
+
+            this.props.updateCellStates(x,y)
+
+            this.checkValue()
         } else if (event.nativeEvent.which === 3){
             this.flag()
         }
@@ -35,15 +48,15 @@ export default class Cell extends React.Component {
         )
     }
 
-    pressedCell = (event) => {
-        if (event.nativeEvent.which === 1){
-            return this.setState({
-                classNames: 'cell revealed'
-            })
-        }
-    }
+    // pressedCell = (event) => {
+    //     if (event.nativeEvent.which === 1){
+    //         return this.setState({
+    //             classNames: 'cell revealed'
+    //         })
+    //     }
+    // }
 
-    resetCell = () => {
+    resetCell = () => {git
         return this.setState({
             classNames: 'cell'
         })
@@ -51,9 +64,9 @@ export default class Cell extends React.Component {
 
     render(){
         return (
-            <div className={this.state.classNames}
+            <div className={this.state.revealed === true ? 'cell revealed' : 'cell'}
                 id={`${this.props.x}-${this.props.y}`}
-                onMouseDown={this.state.flagged === true ? null : this.pressedCell} 
+                // onMouseDown={this.state.flagged === true ? null : this.pressedCell} 
                 onMouseOut={this.state.revealed === true ? null : this.resetCell} 
                 onClick={this.state.flagged === true ? null : this.clickedCell}
                 onContextMenu={this.state.revealed === true ? null : this.clickedCell}
