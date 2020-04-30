@@ -4,14 +4,23 @@ body {
   padding: 10px
 }
 
-.App {
+.small-board {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border: 3px outset lightskyblue;
+  border: 3px outset hsl(190,80%,65%);
   width: 180px;
   height: 242px;
   background-color: linen;
+}
+
+button {
+  width: 30px;
+  height: 30px;
+  background-color: hsl(110,80%,50%);
+  box-sizing: border-box;
+  border: 1px outset hsl(110,80%,80%);
+  margin: 5px
 }
 
 .board {
@@ -24,9 +33,9 @@ body {
 .cell {
   width: 20px;
   height: 20px;
-  background-color: lightskyblue;
+  background-color: hsl(190,80%,50%);
   box-sizing: border-box;
-  border: 1px outset lightblue;
+  border: 1px outset hsl(190,80%,80%);
   font-size: 10px;
   cursor: default;
 }
