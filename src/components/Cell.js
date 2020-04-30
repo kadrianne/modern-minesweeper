@@ -7,6 +7,9 @@ export default class Cell extends React.Component {
         // classNames: `cell`
     }
 
+    componentWillReceiveProps({revealed}){
+        this.setState({revealed})
+    }
 
     checkValue = () => {
         const {x,y,value,checkAdjacentCells} = this.props
@@ -56,10 +59,14 @@ export default class Cell extends React.Component {
     //     }
     // }
 
-    resetCell = () => {git
+    resetCell = () => {
         return this.setState({
             classNames: 'cell'
         })
+    }
+
+    componentDidUpdate(){
+        
     }
 
     render(){

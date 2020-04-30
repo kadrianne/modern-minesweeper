@@ -9,18 +9,34 @@ export default class Board extends React.Component {
         boardValues: [],
     }
 
-    checkAdjacentCells = (x,y) => {
-        console.log(x,y)
-    }
-
     updateCellStates = (x,y) => {
         const updatedCellState = this.state.cellStates
 
         updatedCellState[x][y] = true
-
+        
         this.setState({
             cellStates: updatedCellState
         })
+    }
+
+    checkAdjacentCells = (x,y) => {
+        const rows = [x-1,x,x+1]
+        const cols = [y-1,y,y+1]
+        const updatedCellState = this.state.cellStates
+
+        rows.forEach(row => {
+            if (row >= 0 && row <= 8){
+                cols.forEach(col => {
+                    if (col >= 0 && col <= 8){
+                        if (this.state.boardValues[row][col] !== '💣'){
+                            updatedCellState[row][col] = true
+                        }
+                    }
+                })
+            }
+        })
+
+        this.setState({cellStates: updatedCellState})
     }
 
     countMines = (x,y,updatedBoardValues) => {
