@@ -21,9 +21,9 @@ export default class Cell extends React.Component {
 
     handleClick = (event) => {
         event.preventDefault()
-        const {i,j,revealCell} = this.props
+        const {x,y,revealCell} = this.props
         
-        revealCell(i,j)
+        revealCell(x,y)
         this.clickedCell(event)
     }
 

@@ -31,7 +31,7 @@ export default class Board extends React.Component {
     }
 
     revealCell = (x,y) => {
-        const cellState = this.state.boardState[x][x]
+        const cellState = this.state.boardState[x][y]
         if (cellState == 'mine'){
             console.log('mine')
         } else {
@@ -43,7 +43,7 @@ export default class Board extends React.Component {
         let x = -1
         return this.state.boardState.map(row => {
             x++
-            let y = 0
+            let y = -1
             return row.map(cell => {
                 y++
                 if (cell == null){
