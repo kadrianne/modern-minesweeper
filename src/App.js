@@ -11,17 +11,15 @@ class App extends React.Component {
     boardClass: 'small-board'
   }
 
-  changeGameState = () => {
-    this.setState({
-      gameState: 'new'
-    })
+  changeGameState = (gameState) => {
+    this.setState({gameState})
   }
 
   render(){
     return (
       <div className={this.state.boardClass}>
         <Header changeGameState={this.changeGameState} />
-        <Board rows={this.state.rows} columns={this.state.columns} />
+        <Board rows={this.state.rows} columns={this.state.columns} changeGameState={this.changeGameState} gameState={this.state.gameState} />
       </div>
     )
   }

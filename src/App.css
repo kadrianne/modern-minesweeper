@@ -17,7 +17,7 @@ body {
 button {
   width: 30px;
   height: 30px;
-  background-color: hsl(110,80%,50%);
+  background-color: hsl(190,80%,50%);
   box-sizing: border-box;
   border: 1px outset hsl(110,80%,80%);
   margin: 5px
@@ -101,4 +101,8 @@ button {
 }
 .zero {
   display: none;
+}
+
+.revealed.bomb {
+  background-color: rgba(226, 29, 29, 0.747);
 }
