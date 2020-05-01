@@ -5,9 +5,28 @@ import {getRandomInteger} from '../helpers.js'
 export default class Board extends React.Component {
 
     state = {
+        minePositions: [],
         cellStates: [],
         boardValues: [],
         flagsBoard: []
+    }
+
+    lostGame = () => {
+        const revealedBoard = this.state.cellStates
+
+        this.state.minePositions.forEach(position => {
+            const x = position.split(",")[0]
+            const y = position.split(",")[1]
+
+            revealedBoard[x][y] = true
+        })
+        
+        this.setState({cellStates: revealedBoard})
+        this.props.changeGameState('lost')
+    }
+
+    clickedBomb = () => {
+
     }
 
     updateCellStates = (x,y) => {
@@ -51,7 +70,7 @@ console.log(flaggedState)
         this.setState({cellStates: updatedCellState})
     }
 
-    countMines = (x,y,updatedBoardValues) => {
+    countMines = (x,y,boardValues) => {
         const rows = [x-1,x,x+1]
         const cols = [y-1,y,y+1]
         let adjacentMines = 0
@@ -60,7 +79,7 @@ console.log(flaggedState)
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (updatedBoardValues[row][col] == '💣'){
+                        if (boardValues[row][col] == '💣'){
                             adjacentMines++
                         }
                     }
@@ -101,6 +120,8 @@ console.log(flaggedState)
                         updateFlagsBoard={this.updateFlagsBoard}
                         updateFlagsMarked={this.updateFlagsMarked}
                         revealed={this.state.cellStates[x][y]}
+                        lostGame={this.lostGame}
+                        gameState={this.props.gameState}
                     />
                 )
             })
@@ -124,15 +145,17 @@ console.log(flaggedState)
     componentDidMount(){
         const {rows,columns} = this.props
         const boardValues = this.createBoard(rows,columns)
+        const cellStates = this.createBoard(rows,columns)
+        const flagsBoard = this.createBoard(rows,columns)
 
         let mines = 10
         let minePositions = []
         while (mines > 0){
-            let i = getRandomInteger(1,rows)
-            let j = getRandomInteger(1,columns)
+            let i = getRandomInteger(1,rows) - 1
+            let j = getRandomInteger(1,columns) - 1
     
             if (!minePositions.some(position => position == `${i},${j}`)) {
-                boardValues[i-1][j-1] = '💣'
+                boardValues[i][j] = '💣'
                 minePositions.push(`${i},${j}`)
                 mines--
             }
@@ -146,11 +169,7 @@ console.log(flaggedState)
             }
         }
 
-        this.setState({
-            boardValues: boardValues,
-            cellStates: this.createBoard(rows,columns),
-            flagsBoard: this.createBoard(rows,columns)
-        })
+        this.setState({minePositions,boardValues,cellStates,flagsBoard})
     }
 
     render(){

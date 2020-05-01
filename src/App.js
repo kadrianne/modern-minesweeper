@@ -13,10 +13,8 @@ class App extends React.Component {
     flagsMarked: 0
   }
 
-  changeGameState = () => {
-    this.setState({
-      gameState: 'new'
-    })
+  changeGameState = (gameState) => {
+    this.setState({gameState})
   }
 
   updateFlagsMarked = () => {
@@ -34,6 +32,8 @@ class App extends React.Component {
         <Board 
           rows={this.state.rows}
           columns={this.state.columns}
+          changeGameState={this.changeGameState}
+          gameState={this.state.gameState}
           difficulty={this.state.difficulty}
           updateFlagsMarked={this.updateFlagsMarked}
         />
