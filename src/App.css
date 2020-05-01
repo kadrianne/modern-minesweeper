@@ -4,6 +4,22 @@ body {
   padding: 10px
 }
 
+header {
+  display: flex;
+}
+
+.flag-counter {
+  width: 60px;
+  height: 26px;
+  border: 2px ridge hsl(190,80%,65%);
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(22, 154, 180);
+  font-weight: 700;
+}
+
 .small-board {
   display: flex;
   flex-direction: column;
@@ -19,7 +35,7 @@ button {
   height: 30px;
   background-color: hsl(190,80%,50%);
   box-sizing: border-box;
-  border: 1px outset hsl(110,80%,80%);
+  border: 1px outset hsl(190,80%,50%);
   margin: 5px
 }
 

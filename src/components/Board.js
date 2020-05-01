@@ -8,6 +8,7 @@ export default class Board extends React.Component {
         minePositions: [],
         cellStates: [],
         boardValues: [],
+        flagsBoard: []
     }
 
     lostGame = () => {
@@ -24,18 +25,37 @@ export default class Board extends React.Component {
         this.props.changeGameState('lost')
     }
 
-    clickedBomb = () => {
+    updateCellStates = (x,y) => {
+        const cellStates = this.state.cellStates
+
+        cellStates[x][y] = true
+        
+        this.setState({cellStates})
+    }
+
+    countFlagsMarked = () => {
+        const flagsMarked = this.state.flagsBoard.reduce((flagsMarked,row) => {
+            const rowValue = row.reduce((acc,currentValue) => {
+                if (currentValue == true){
+                    return acc + 1
+                } else {
+                    return acc
+                }
+            },0)
+            return flagsMarked + rowValue
+        },0)
+
+        this.props.updateFlagsMarked(flagsMarked)
 
     }
 
-    updateCellStates = (x,y) => {
-        const updatedCellState = this.state.cellStates
+    updateFlagsBoard = (x,y,flaggedState) => {
+        const flagsBoard = this.state.flagsBoard
 
-        updatedCellState[x][y] = true
-        
-        this.setState({
-            cellStates: updatedCellState
-        })
+        flagsBoard[x][y] = flaggedState
+
+        this.setState({flagsBoard})
+        this.countFlagsMarked()
     }
 
     checkAdjacentCells = (x,y) => {
@@ -47,7 +67,7 @@ export default class Board extends React.Component {
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (this.state.cellStates[row][col] == false){
+                        if (this.state.cellStates[row][col] == false && this.state.flagsBoard[row][col] == false){
                             if (this.state.boardValues[row][col] == '0'){
                                 updatedCellState[row][col] = true
                                 this.checkAdjacentCells(row,col)
@@ -110,7 +130,10 @@ export default class Board extends React.Component {
                         iconClass={cellClass[cell]}
                         checkAdjacentCells={this.checkAdjacentCells}
                         updateCellStates={this.updateCellStates}
+                        updateFlagsBoard={this.updateFlagsBoard}
+                        updateFlagsMarked={this.updateFlagsMarked}
                         revealed={this.state.cellStates[x][y]}
+                        flagged={this.state.flagsBoard[x][y]}
                         lostGame={this.lostGame}
                         gameState={this.props.gameState}
                     />
@@ -137,6 +160,7 @@ export default class Board extends React.Component {
         const {rows,columns} = this.props
         const boardValues = this.createBoard(rows,columns)
         const cellStates = this.createBoard(rows,columns)
+        const flagsBoard = this.createBoard(rows,columns)
 
         let mines = 10
         let minePositions = []
@@ -159,7 +183,7 @@ export default class Board extends React.Component {
             }
         }
 
-        this.setState({minePositions,boardValues,cellStates})
+        this.setState({minePositions,boardValues,cellStates,flagsBoard})
     }
 
     render(){
