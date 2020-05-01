@@ -25,8 +25,8 @@ header {
 }
 
 .flag-counter {
-  width: 60px;
-  height: 26px;
+  width: 53px;
+  height: 32px;
   border: 2px ridge hsl(190,80%,65%);
   margin: 5px;
   display: flex;
@@ -36,9 +36,16 @@ header {
   font-weight: 700;
 }
 
-.win {
+.won {
   font-size: 48px;
   color: rgb(40, 191, 221);
+  font-weight: 700;
+  font-family: 'Raleway', sans-serif;
+}
+
+.lost {
+  font-size: 48px;
+  color: rgb(226, 29, 29, 0.747);
   font-weight: 700;
   font-family: 'Raleway', sans-serif;
 }
@@ -49,24 +56,25 @@ header {
   text-align: center;
   border: 3px outset hsl(190,80%,65%);
   width: 180px;
-  height: 242px;
+  height: 229px;
   background-color: linen;
 }
 
 button {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   background-color: hsl(190,80%,50%);
   box-sizing: border-box;
   border: 1px outset hsl(190,80%,50%);
-  margin: 5px
+  margin: 5px;
+  font-size: 16px
 }
 
 .board {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 5px
+  border-top: 3px outset hsl(190,80%,50%);
 }
 
 .cell {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+// import './App.css';
 import Header from './components/Header';
 import Board from './components/Board';
 
@@ -20,6 +20,17 @@ function App() {
 
   const changeGameState = (gameState) => setGameState(gameState)
   const updateFlagsMarked = (flagsMarked) => setflagsMarked(flagsMarked)
+
+  const displayText = () => {
+
+    const text = {
+      'won': '🎉 YOU WIN 🎉',
+      'lost': '☠️ YOU LOSE ☠️'
+    }
+
+    return text[gameState]
+
+  }
   
   return (
     <>
@@ -28,6 +39,7 @@ function App() {
         changeGameState={changeGameState}
         difficulty={difficulty}
         flagsMarked={flagsMarked}
+        gameState={gameState}
       />
       <Board 
         rows={config[difficulty]['rows']}
@@ -39,7 +51,7 @@ function App() {
         updateFlagsMarked={updateFlagsMarked}
       />
     </div>
-    {gameState == 'won' ? <p class='win'>🎉 YOU WON 🎉</p> : null}
+    <p class={gameState}>{displayText()}</p>
     </>
   )
 }

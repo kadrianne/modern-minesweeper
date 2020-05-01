@@ -6,7 +6,7 @@ export default function Header(props){
     return (
         <header>
             <FlagCounter difficulty={props.difficulty} flagsMarked={props.flagsMarked} />
-            <GameButton changeGameState={props.changeGameState} />
+            <GameButton changeGameState={props.changeGameState} gameState={props.gameState} />
         </header>
     )
 }
