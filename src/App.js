@@ -1,45 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Board from './components/Board';
 
-class App extends React.Component {
-  state = {
-    gameState: '',
-    rows: 9,
-    columns: 9,
-    boardClass: 'small-board',
-    difficulty: 'easy',
-    flagsMarked: 0
+function App() {
+
+  const [gameState, setGameState] = useState('')
+  const [difficulty, setDifficulty] = useState('easy')
+  const [flagsMarked, setflagsMarked] = useState(0)
+
+  const config = {
+    'easy': {
+      'mines': 10,
+      'rows': 9,
+      'columns': 9,
+      'boardClass': 'small-board'
+    }
   }
 
-  changeGameState = (gameState) => {
-    this.setState({gameState})
-  }
-
-  updateFlagsMarked = (flagsMarked) => {
-    this.setState({flagsMarked})
-  }
-
-  render(){
-    return (
-      <div className={this.state.boardClass}>
-        <Header 
-          changeGameState={this.changeGameState}
-          difficulty={this.state.difficulty}
-          flagsMarked={this.state.flagsMarked}
-        />
-        <Board 
-          rows={this.state.rows}
-          columns={this.state.columns}
-          changeGameState={this.changeGameState}
-          gameState={this.state.gameState}
-          difficulty={this.state.difficulty}
-          updateFlagsMarked={this.updateFlagsMarked}
-        />
-      </div>
-    )
-  }
+  const changeGameState = (gameState) => setGameState(gameState)
+  const updateFlagsMarked = (flagsMarked) => setflagsMarked(flagsMarked)
+  
+  return (
+    <div className={config[difficulty]['boardClass']}>
+      <Header 
+        changeGameState={changeGameState}
+        difficulty={difficulty}
+        flagsMarked={flagsMarked}
+      />
+      <Board 
+        rows={config[difficulty]['rows']}
+        columns={config[difficulty]['columns']}
+        mines={config[difficulty]['mines']}
+        changeGameState={changeGameState}
+        gameState={gameState}
+        difficulty={difficulty}
+        updateFlagsMarked={updateFlagsMarked}
+      />
+    </div>
+  )
 }
 
 export default App;
