@@ -11,6 +11,26 @@ export default class Board extends React.Component {
         flagsBoard: []
     }
 
+    checkForWin = () => {
+        const {rows,columns,mines,changeGameState} = this.props
+        const cellStates = this.state.cellStates
+        const revealedCells = cellStates.reduce((cellsRevealed,row) => {
+            const rowValue = row.reduce((acc,currentValue) => {
+                if (currentValue == true){
+                    return acc + 1
+                } else {
+                    return acc
+                }
+            },0)
+            return cellsRevealed + rowValue
+        },0)
+
+        const totalCells = rows * columns - mines
+        if (revealedCells == totalCells){
+            changeGameState('won')
+        }
+    }
+
     lostGame = () => {
         const revealedBoard = this.state.cellStates
 
@@ -81,6 +101,7 @@ export default class Board extends React.Component {
         })
 
         this.setState({cellStates: updatedCellState})
+        this.checkForWin()
     }
 
     countMines = (x,y,boardValues) => {
@@ -135,6 +156,7 @@ export default class Board extends React.Component {
                         revealed={this.state.cellStates[x][y]}
                         flagged={this.state.flagsBoard[x][y]}
                         lostGame={this.lostGame}
+                        checkForWin={this.checkForWin}
                         gameState={this.props.gameState}
                     />
                 )
@@ -157,21 +179,21 @@ export default class Board extends React.Component {
     }
 
     componentDidMount(){
-        const {rows,columns} = this.props
+        const {rows,columns,mines} = this.props
         const boardValues = this.createBoard(rows,columns)
         const cellStates = this.createBoard(rows,columns)
         const flagsBoard = this.createBoard(rows,columns)
 
-        let mines = 10
+        let mineCount = mines
         let minePositions = []
-        while (mines > 0){
+        while (mineCount > 0){
             let i = getRandomInteger(1,rows) - 1
             let j = getRandomInteger(1,columns) - 1
     
             if (!minePositions.some(position => position == `${i},${j}`)) {
                 boardValues[i][j] = '💣'
                 minePositions.push(`${i},${j}`)
-                mines--
+                mineCount--
             }
         }
 
@@ -184,6 +206,10 @@ export default class Board extends React.Component {
         }
 
         this.setState({minePositions,boardValues,cellStates,flagsBoard})
+    }
+
+    componentDidUpdate(){
+        this.checkForWin()
     }
 
     render(){

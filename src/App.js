@@ -22,6 +22,7 @@ function App() {
   const updateFlagsMarked = (flagsMarked) => setflagsMarked(flagsMarked)
   
   return (
+    <>
     <div className={config[difficulty]['boardClass']}>
       <Header 
         changeGameState={changeGameState}
@@ -38,6 +39,8 @@ function App() {
         updateFlagsMarked={updateFlagsMarked}
       />
     </div>
+    {gameState == 'won' ? <p class='win'>🎉 YOU WON 🎉</p> : null}
+    </>
   )
 }
 

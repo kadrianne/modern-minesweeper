@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default class Cell extends React.Component {
     state = {
@@ -7,7 +7,7 @@ export default class Cell extends React.Component {
     }
 
     checkValue = (event) => {
-        const {x,y,value,checkAdjacentCells,lostGame} = this.props
+        const {x,y,value,checkAdjacentCells,lostGame,checkForWin} = this.props
         if (value == '0'){
             checkAdjacentCells(x,y)
         } else if (value == '💣'){
