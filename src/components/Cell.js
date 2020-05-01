@@ -18,30 +18,14 @@ export default class Cell extends React.Component {
 
     clickedCell = (event) => {
         event.preventDefault()
-        const {x,y,updateCellStates} = this.props
+        const {x,y,updateCellStates,updateFlagsBoard,flagged} = this.props
         
         if (event.nativeEvent.which === 1){
-            this.setState({
-                flagged: false
-            })
-
             updateCellStates(x,y)
             this.checkValue()
-
         } else if (event.nativeEvent.which === 3){
-            this.flagCell()
+            updateFlagsBoard(x,y,!flagged)
         }
-    }
-    
-    flagCell = () => {
-        const {x,y,updateFlagsBoard} = this.props
-
-        this.setState(previousState => ({
-            flagged: !previousState.flagged
-            }),
-            updateFlagsBoard(x,y,this.state.flagged)
-        ) 
-        
     }
 
     showValue = () => {
@@ -60,22 +44,22 @@ export default class Cell extends React.Component {
     //     }
     // }
 
-    resetCell = () => {
-        return this.setState({
-            classNames: 'cell'
-        })
-    }
+    // resetCell = () => {
+    //     return this.setState({
+    //         classNames: 'cell'
+    //     })
+    // }
 
     render(){
         return (
             <div className={`cell ${this.props.revealed === true ? `revealed` : ''} ${this.state.bombClicked === true ? `bomb` : null}`}
                 id={`${this.props.x}-${this.props.y}`}
                 // onMouseDown={this.state.flagged === true ? null : this.pressedCell}
-                onMouseOut={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.resetCell : null}
+                // onMouseOut={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.resetCell : null}
                 onClick={this.props.gameState !== 'lost' ? this.state.flagged === true ? null : this.clickedCell : null}
                 onContextMenu={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.clickedCell : null}
             >
-                {this.state.flagged === true ? '❗️' : null}
+                {this.props.flagged === true ? '❗️' : null}
                 {this.showValue()}
             </div>
         )

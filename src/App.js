@@ -17,8 +17,8 @@ class App extends React.Component {
     this.setState({gameState})
   }
 
-  updateFlagsMarked = () => {
-    this.setState({flagsMarked: this.state.flagsMarked + 1})
+  updateFlagsMarked = (flagsMarked) => {
+    this.setState({flagsMarked})
   }
 
   render(){

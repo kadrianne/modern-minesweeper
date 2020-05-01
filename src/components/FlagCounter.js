@@ -10,7 +10,7 @@ export default function FlagCounter(props){
 
     return (
         <div class='flag-counter'>
-            {flagsLeft}
+            {flagsLeft - props.flagsMarked}
         </div>
     )
 }

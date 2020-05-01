@@ -25,10 +25,6 @@ export default class Board extends React.Component {
         this.props.changeGameState('lost')
     }
 
-    clickedBomb = () => {
-
-    }
-
     updateCellStates = (x,y) => {
         const cellStates = this.state.cellStates
 
@@ -37,12 +33,29 @@ export default class Board extends React.Component {
         this.setState({cellStates})
     }
 
+    countFlagsMarked = () => {
+        const flagsMarked = this.state.flagsBoard.reduce((flagsMarked,row) => {
+            const rowValue = row.reduce((acc,currentValue) => {
+                if (currentValue == true){
+                    return acc + 1
+                } else {
+                    return acc
+                }
+            },0)
+            return flagsMarked + rowValue
+        },0)
+
+        this.props.updateFlagsMarked(flagsMarked)
+
+    }
+
     updateFlagsBoard = (x,y,flaggedState) => {
         const flagsBoard = this.state.flagsBoard
-console.log(flaggedState)
+
         flagsBoard[x][y] = flaggedState
 
         this.setState({flagsBoard})
+        this.countFlagsMarked()
     }
 
     checkAdjacentCells = (x,y) => {
@@ -120,6 +133,7 @@ console.log(flaggedState)
                         updateFlagsBoard={this.updateFlagsBoard}
                         updateFlagsMarked={this.updateFlagsMarked}
                         revealed={this.state.cellStates[x][y]}
+                        flagged={this.state.flagsBoard[x][y]}
                         lostGame={this.lostGame}
                         gameState={this.props.gameState}
                     />

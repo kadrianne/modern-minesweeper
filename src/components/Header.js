@@ -5,7 +5,7 @@ import FlagCounter from './FlagCounter'
 export default function Header(props){
     return (
         <header>
-            <FlagCounter difficulty={props.difficulty} />
+            <FlagCounter difficulty={props.difficulty} flagsMarked={props.flagsMarked} />
             <GameButton changeGameState={props.changeGameState} />
         </header>
     )
