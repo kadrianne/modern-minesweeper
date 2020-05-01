@@ -112,6 +112,7 @@ export default class Board extends React.Component {
                         updateCellStates={this.updateCellStates}
                         revealed={this.state.cellStates[x][y]}
                         lostGame={this.lostGame}
+                        gameState={this.props.gameState}
                     />
                 )
             })

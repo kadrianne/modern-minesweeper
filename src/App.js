@@ -19,7 +19,7 @@ class App extends React.Component {
     return (
       <div className={this.state.boardClass}>
         <Header changeGameState={this.changeGameState} />
-        <Board rows={this.state.rows} columns={this.state.columns} changeGameState={this.changeGameState} />
+        <Board rows={this.state.rows} columns={this.state.columns} changeGameState={this.changeGameState} gameState={this.state.gameState} />
       </div>
     )
   }
