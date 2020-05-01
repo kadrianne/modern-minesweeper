@@ -8,7 +8,9 @@ class App extends React.Component {
     gameState: '',
     rows: 9,
     columns: 9,
-    boardClass: 'small-board'
+    boardClass: 'small-board',
+    difficulty: 'easy',
+    flagsMarked: 0
   }
 
   changeGameState = () => {
@@ -17,11 +19,24 @@ class App extends React.Component {
     })
   }
 
+  updateFlagsMarked = () => {
+    this.setState({flagsMarked: this.state.flagsMarked + 1})
+  }
+
   render(){
     return (
       <div className={this.state.boardClass}>
-        <Header changeGameState={this.changeGameState} />
-        <Board rows={this.state.rows} columns={this.state.columns} />
+        <Header 
+          changeGameState={this.changeGameState}
+          difficulty={this.state.difficulty}
+          flagsMarked={this.state.flagsMarked}
+        />
+        <Board 
+          rows={this.state.rows}
+          columns={this.state.columns}
+          difficulty={this.state.difficulty}
+          updateFlagsMarked={this.updateFlagsMarked}
+        />
       </div>
     )
   }

@@ -4,6 +4,16 @@ body {
   padding: 10px
 }
 
+header {
+  display: flex;
+}
+
+.flag-counter {
+  width: 60px;
+  height: 30px;
+  border: 1px solid black
+}
+
 .small-board {
   display: flex;
   flex-direction: column;

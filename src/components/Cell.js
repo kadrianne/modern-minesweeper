@@ -29,18 +29,23 @@ export default class Cell extends React.Component {
                 // classNames: 'cell revealed'
             })
 
-            this.props.updateCellStates(x,y)
-
+            updateCellStates(x,y)
             this.checkValue()
+
         } else if (event.nativeEvent.which === 3){
-            this.flag()
+            this.flagCell()
         }
     }
+    
+    flagCell = () => {
+        const {x,y,updateFlagsBoard} = this.props
 
-    flag = () => {
         this.setState(previousState => ({
             flagged: !previousState.flagged
-        }))
+            }),
+            updateFlagsBoard(x,y,this.state.flagged)
+        ) 
+        
     }
 
     showValue = () => {

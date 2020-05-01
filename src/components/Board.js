@@ -7,16 +7,23 @@ export default class Board extends React.Component {
     state = {
         cellStates: [],
         boardValues: [],
+        flagsBoard: []
     }
 
     updateCellStates = (x,y) => {
-        const updatedCellState = this.state.cellStates
+        const cellStates = this.state.cellStates
 
-        updatedCellState[x][y] = true
+        cellStates[x][y] = true
         
-        this.setState({
-            cellStates: updatedCellState
-        })
+        this.setState({cellStates})
+    }
+
+    updateFlagsBoard = (x,y,flaggedState) => {
+        const flagsBoard = this.state.flagsBoard
+console.log(flaggedState)
+        flagsBoard[x][y] = flaggedState
+
+        this.setState({flagsBoard})
     }
 
     checkAdjacentCells = (x,y) => {
@@ -91,6 +98,8 @@ export default class Board extends React.Component {
                         iconClass={cellClass[cell]}
                         checkAdjacentCells={this.checkAdjacentCells}
                         updateCellStates={this.updateCellStates}
+                        updateFlagsBoard={this.updateFlagsBoard}
+                        updateFlagsMarked={this.updateFlagsMarked}
                         revealed={this.state.cellStates[x][y]}
                     />
                 )
@@ -114,8 +123,7 @@ export default class Board extends React.Component {
 
     componentDidMount(){
         const {rows,columns} = this.props
-        const updatedBoardValues = this.createBoard(rows,columns)
-        const initialCellStates = this.createBoard(rows,columns)
+        const boardValues = this.createBoard(rows,columns)
 
         let mines = 10
         let minePositions = []
@@ -124,7 +132,7 @@ export default class Board extends React.Component {
             let j = getRandomInteger(1,columns)
     
             if (!minePositions.some(position => position == `${i},${j}`)) {
-                updatedBoardValues[i-1][j-1] = '💣'
+                boardValues[i-1][j-1] = '💣'
                 minePositions.push(`${i},${j}`)
                 mines--
             }
@@ -132,15 +140,16 @@ export default class Board extends React.Component {
 
         for (let x = 0; x < rows; x++){
             for (let y = 0; y < columns; y++){
-                if (updatedBoardValues[x][y] != '💣'){
-                    updatedBoardValues[x][y] = this.countMines(x,y,updatedBoardValues)
+                if (boardValues[x][y] != '💣'){
+                    boardValues[x][y] = this.countMines(x,y,boardValues)
                 }
             }
         }
 
         this.setState({
-            boardValues: updatedBoardValues,
-            cellStates: initialCellStates
+            boardValues: boardValues,
+            cellStates: this.createBoard(rows,columns),
+            flagsBoard: this.createBoard(rows,columns)
         })
     }
 
