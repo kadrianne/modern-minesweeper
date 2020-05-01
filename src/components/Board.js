@@ -24,7 +24,10 @@ export default class Board extends React.Component {
         this.props.changeGameState('lost')
     }
 
-    clickedBomg
+    clickedBomb = () => {
+
+    }
+
     updateCellStates = (x,y) => {
         const updatedCellState = this.state.cellStates
 
