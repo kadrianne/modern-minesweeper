@@ -10,8 +10,8 @@ header {
 
 .flag-counter {
   width: 60px;
-  height: 30px;
-  border: 2px inset hsl(190,80%,65%);
+  height: 26px;
+  border: 2px ridge hsl(190,80%,65%);
   margin: 5px;
   display: flex;
   justify-content: center;
