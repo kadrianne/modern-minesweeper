@@ -5,7 +5,7 @@ import Board from './components/Board';
 
 function App() {
 
-  const [gameState, setGameState] = useState('')
+  const [gameState, setGameState] = useState('new')
   const [difficulty, setDifficulty] = useState('easy')
   const [flagsMarked, setflagsMarked] = useState(0)
 
