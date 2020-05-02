@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-// import './App.css';
-import Header from './components/Header';
-import Board from './components/Board';
+import React, { useState } from 'react'
+import Board from './components/Board'
+import GameButton from './components/GameButton'
+import FlagCounter from './components/FlagCounter'
+import Timer from './components/Timer'
 
 function App() {
 
   const [gameState, setGameState] = useState('new')
   const [difficulty, setDifficulty] = useState('easy')
-  const [flagsMarked, setflagsMarked] = useState(0)
+  const [flagsMarked, setFlagsMarked] = useState(0)
+  const [timerOn, setTimerOn] = useState(false)
 
   const config = {
     'easy': {
@@ -19,7 +21,7 @@ function App() {
   }
 
   const changeGameState = (gameState) => setGameState(gameState)
-  const updateFlagsMarked = (flagsMarked) => setflagsMarked(flagsMarked)
+  const updateFlagsMarked = (flagsMarked) => setFlagsMarked(flagsMarked)
 
   const displayText = () => {
 
@@ -35,12 +37,11 @@ function App() {
   return (
     <>
     <div className={config[difficulty]['boardClass']}>
-      <Header 
-        changeGameState={changeGameState}
-        difficulty={difficulty}
-        flagsMarked={flagsMarked}
-        gameState={gameState}
-      />
+      <header>
+          <FlagCounter difficulty={difficulty} flagsMarked={flagsMarked} />
+          <GameButton changeGameState={changeGameState} gameState={gameState} />
+          <Timer timerOn={timerOn} />
+      </header>
       <Board 
         rows={config[difficulty]['rows']}
         columns={config[difficulty]['columns']}

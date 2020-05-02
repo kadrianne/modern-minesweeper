@@ -5,6 +5,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  background-color: linen;
 }
 
 h1 {
@@ -25,10 +26,22 @@ header {
 }
 
 .flag-counter {
-  width: 53px;
+  width: 62px;
   height: 32px;
   border: 2px ridge hsl(190,80%,65%);
-  margin: 5px;
+  margin: 5px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(22, 154, 180);
+  font-weight: 700;
+}
+
+.timer {
+  width: 62px;
+  height: 32px;
+  border: 2px ridge hsl(190,80%,65%);
+  margin: 5px 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,7 +79,7 @@ button {
   background-color: hsl(190,80%,50%);
   box-sizing: border-box;
   border: 1px outset hsl(190,80%,50%);
-  margin: 5px;
+  margin: 5px 0px;
   font-size: 16px
 }
 
