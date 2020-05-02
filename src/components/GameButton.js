@@ -8,7 +8,6 @@ export default function GameButton(props){
 
     const displayEmoji = (gameState) => {
         const emojis = {
-            '': '🙂',
             'new': '🙂',
             'won': '😎',
             'lost': '😭'
