@@ -9,7 +9,7 @@ export default function FlagCounter(props){
     const [flagsLeft, setFlags] = useState(totalMines[props.difficulty])
 
     return (
-        <div class='flag-counter'>
+        <div className='flag-counter'>
             ❗️ {flagsLeft - props.flagsMarked}
         </div>
     )

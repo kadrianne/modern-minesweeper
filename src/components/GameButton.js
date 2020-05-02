@@ -4,6 +4,7 @@ export default function GameButton(props){
 
     const handleClick = (props) => {
         props.changeGameState('new')
+        props.resetTimer()
     }
 
     const displayEmoji = (gameState) => {
