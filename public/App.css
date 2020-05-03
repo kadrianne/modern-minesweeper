@@ -80,7 +80,7 @@ button {
   box-sizing: border-box;
   border: 1px outset hsl(190,80%,50%);
   margin: 5px 0px;
-  font-size: 16px
+  font-size: 20px;
 }
 
 .board {
@@ -96,8 +96,15 @@ button {
   background-color: hsl(190,80%,50%);
   box-sizing: border-box;
   border: 1px outset hsl(190,80%,80%);
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: default;
+}
+
+img {
+  width: 12px;
+  height: 12px;
+  padding: 4px;
 }
 
 .revealed {
@@ -113,50 +120,34 @@ button {
 }
 
 .red {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(201, 65, 65)
 }
 
 .blue {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(0, 123, 223)
 }
 
 .green {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(64, 191, 96)
 }
 
 .purple {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(92, 64, 191)
 }
 
 .black {
-  font-size: 14px;
-  font-weight: 700;
   color: #000
 }
 
 .magenta {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(179, 40, 125)
 }
 
 .yellow {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(192, 170, 63)
 }
 
 .turquoise {
-  font-size: 14px;
-  font-weight: 700;
   color: rgb(34, 165, 154)
 }
 .zero {
