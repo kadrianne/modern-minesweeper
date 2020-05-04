@@ -45,9 +45,13 @@ function App() {
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1)
       }, 1000)
-    } 
+    }
     return () => clearInterval(interval)
   }, [timerOn,seconds])
+
+  useEffect(() => {
+      stopTimer()
+  }, [gameState])
   
   return (
     <>
@@ -66,7 +70,6 @@ function App() {
         difficulty={difficulty}
         updateFlagsMarked={updateFlagsMarked}
         startTimer={startTimer}
-        stopTimer={stopTimer}
       />
     </div>
     <p class={gameState}>{displayText()}</p>
