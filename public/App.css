@@ -56,6 +56,13 @@ header {
   font-family: 'Raleway', sans-serif;
 }
 
+#score-form-title {
+  font-size: 48px;
+  color: rgb(40, 191, 221);
+  font-weight: 700;
+  font-family: 'Raleway', sans-serif;
+}
+
 .lost {
   font-size: 48px;
   color: rgb(226, 29, 29, 0.747);

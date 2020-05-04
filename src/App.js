@@ -3,6 +3,7 @@ import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
+import ScoreForm from './components/ScoreForm'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
+  const [scoreFormOpen, setScoreFormOpen] = useState(false)
 
   const config = {
     'easy': {
@@ -23,12 +25,16 @@ function App() {
 
   const changeGameState = (gameState) => setGameState(gameState)
   const updateFlagsMarked = (flagsMarked) => setFlagsMarked(flagsMarked)
+
   const startTimer = () => setTimerOn(true)
   const stopTimer = () => setTimerOn(false)
   const resetTimer = () => {
     setSeconds(0)
     setTimerOn(false)
   }
+
+  const openScoreForm = () => setScoreFormOpen(true)
+  const closeScoreForm = () => setScoreFormOpen(false)
 
   const displayText = () => {
     const text = {
@@ -38,6 +44,8 @@ function App() {
 
     return text[gameState]
   }
+
+  // const displayScoreForm 
 
   useEffect(() => {
     let interval = null
@@ -51,6 +59,9 @@ function App() {
 
   useEffect(() => {
       stopTimer()
+      if (gameState == 'won') {
+        openScoreForm()
+      }
   }, [gameState])
   
   return (
@@ -72,7 +83,8 @@ function App() {
         startTimer={startTimer}
       />
     </div>
-    <p class={gameState}>{displayText()}</p>
+    <p className={gameState}>{displayText()}</p>
+    {scoreFormOpen == true ? <ScoreForm /> : null}
     </>
   )
 }
