@@ -8,14 +8,14 @@ import ScoreForm from './components/ScoreForm'
 function App() {
 
   const [gameState, setGameState] = useState('new')
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState('Easy')
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
 
   const config = {
-    'easy': {
+    'Easy': {
       'mines': 10,
       'rows': 9,
       'columns': 9,
@@ -83,8 +83,9 @@ function App() {
         startTimer={startTimer}
       />
     </div>
-    <p className={gameState}>{displayText()}</p>
-    {scoreFormOpen == true ? <ScoreForm /> : null}
+    <h2 className={gameState}>{displayText()}</h2>
+    <ScoreForm seconds={seconds} difficulty={difficulty}/> 
+    {scoreFormOpen == true ? <ScoreForm seconds={seconds} difficulty={difficulty}/> : null}
     </>
   )
 }
