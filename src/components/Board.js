@@ -28,7 +28,6 @@ export default class Board extends React.Component {
         const totalCells = rows * columns - mines
         if (revealedCells == totalCells){
             changeGameState('won')
-            stopTimer()
         }
     }
 
@@ -45,7 +44,6 @@ export default class Board extends React.Component {
         
         this.setState({cellStates})
         changeGameState('lost')
-        stopTimer()
     }
 
     updateCellStates = (x,y) => {
@@ -104,7 +102,6 @@ export default class Board extends React.Component {
         })
 
         this.setState({cellStates: updatedCellState})
-        this.checkForWin()
     }
 
     countMines = (x,y,boardValues) => {
@@ -216,9 +213,9 @@ export default class Board extends React.Component {
     }
 
     render(){
-        const {rows,columns} = this.props
+        const {rows,columns,startTimer} = this.props
         return (
-            <main className="board" onClick={this.props.startTimer}>
+            <main className="board" onClick={startTimer}>
                 {this.renderBoard(rows,columns)}
             </main>
         )
