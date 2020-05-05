@@ -18,6 +18,7 @@ function App() {
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
+  const [highScoreToggle, setHighScoreToggle] = useState(false)
 
   const config = {
     'Easy': {
@@ -46,6 +47,8 @@ function App() {
     setScoreFormOpen(false)
   }
 
+  const addToHighScores = () => setHighScoreToggle(!highScoreToggle)
+
   const displayText = () => {
     const text = {
       'won': '🎉 YOU WIN 🎉',
@@ -72,11 +75,15 @@ function App() {
       }
   }, [gameState])
 
-  useEffect(() => {
+  const fetchHighScores = () => {
     fetch(`${backendURL}/highscores/${difficulty}`)
         .then(response => response.json())
         .then(setHighScores)
-},[])
+  }
+
+  useEffect(() => {
+    fetchHighScores()
+  },[])
   
   return (
     <>
@@ -102,9 +109,9 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      {scoreFormOpen === true ? <ScoreForm highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     </div>
-    <div className='right-conatiner'>
+    <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
     </div>
     </>

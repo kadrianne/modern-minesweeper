@@ -55,7 +55,7 @@ export default class Board extends React.Component {
 
         flagsBoard[x][y] = flaggedState
 
-        this.setState({flagsBoard})
+        // this.setState({flagsBoard})
         this.countFlagsMarked()
     }
 
@@ -193,7 +193,7 @@ export default class Board extends React.Component {
     }
 
     flagCellsWithMines = () => {
-        const flagsBoard = this.state.flagsBoard
+        const flagsBoard = [...this.state.flagsBoard]
 
         this.state.minePositions.forEach(position => {
             const x = position.split(",")[0]
@@ -203,7 +203,7 @@ export default class Board extends React.Component {
         })
 
         this.props.updateFlagsMarked(this.state.minePositions.length)
-        // this.setState({flagsBoard})
+        this.setState({flagsBoard})
     }
 
     checkForWin = () => {
@@ -227,8 +227,10 @@ export default class Board extends React.Component {
         }
     }
 
-    componentDidUpdate(){
-        this.checkForWin()
+    componentDidUpdate(previousProps,previousState){
+        if (this.props.gameState !== 'won'){
+            this.checkForWin()
+        }
         if (this.props.newGame === true) {
             this.props.resetGame()
             this.boardSetup()
@@ -237,7 +239,7 @@ export default class Board extends React.Component {
 
     handleClick = () => {
         const { gameState,startTimer } = this.props
-        if (gameState == 'new'){
+        if (gameState === 'new'){
             startTimer()
         }
     }
