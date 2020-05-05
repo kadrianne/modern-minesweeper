@@ -42,9 +42,6 @@ function App() {
     setScoreFormOpen(false)
   }
 
-  const openScoreForm = () => setScoreFormOpen(true)
-  const closeScoreForm = () => setScoreFormOpen(false)
-
   const displayText = () => {
     const text = {
       'won': '🎉 YOU WIN 🎉',
@@ -67,7 +64,7 @@ function App() {
   useEffect(() => {
       stopTimer()
       if (gameState === 'won') {
-        openScoreForm()
+        setScoreFormOpen(true)
       }
   }, [gameState])
   
@@ -93,8 +90,7 @@ function App() {
       />
     </div>
     <h2 className={gameState}>{displayText()}</h2>
-    <ScoreForm seconds={seconds} difficulty={difficulty}/> 
-    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty} closeScoreForm={closeScoreForm} /> : null}
+    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty} /> : null}
     </>
   )
 }

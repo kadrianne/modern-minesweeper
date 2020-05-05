@@ -3,6 +3,7 @@ import { Button,Input } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+import Alert from './Alert'
 
 const backendURL = 'http://localhost:4000'
 const styles = {
@@ -24,9 +25,20 @@ const styles = {
     }
   };
 
-function ScoreForm({ seconds,difficulty,classes,children,className }){
+function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreForm }){
 
+    const [hideForm, setHideForm] = useState(false)
     const [displayName, setDisplayName] = useState('')
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    }
+
     const handleChange = (event) => {
         setDisplayName(event.target.value)
     }
@@ -44,14 +56,18 @@ function ScoreForm({ seconds,difficulty,classes,children,className }){
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
+        setOpenSnackbar(true)
+        setHideForm(true)
+        
         const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
-
+        
         postScore(formData)
     }
-
+    
     return (
-        <div className='submit-score'>
+        <>
+        {hideForm === true ? null
+        : <div className='submit-score'>
             <h3>SUBMIT YOUR SCORE</h3>
             <form onSubmit={handleSubmit}>
             <label htmlFor='display-name'>DISPLAY NAME</label>
@@ -62,7 +78,9 @@ function ScoreForm({ seconds,difficulty,classes,children,className }){
             <p>{difficulty}</p>
             <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>
             </form>
-    </div>
+        </div>}
+            <Alert successMessage='Score Posted!' handleClose={handleClose} openSnackbar={openSnackbar} />
+        </>
     )
 }
 
