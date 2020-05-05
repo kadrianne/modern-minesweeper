@@ -3,7 +3,9 @@ import { Button,Input } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+import Alert from './Alert'
 
+const backendURL = 'http://localhost:4000'
 const styles = {
     buttonRoot: {
       background: '#a675cb',
@@ -23,30 +25,62 @@ const styles = {
     }
   };
 
-function ScoreForm({ seconds,difficulty,classes,children,className }){
+function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreForm }){
 
+    const [hideForm, setHideForm] = useState(false)
     const [displayName, setDisplayName] = useState('')
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpenSnackbar(false);
+    }
+
     const handleChange = (event) => {
         setDisplayName(event.target.value)
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const postScore = (data) => {
+        fetch(`${backendURL}/scores`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        setOpenSnackbar(true)
+        setHideForm(true)
+        
+        const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
+        
+        postScore(formData)
+    }
+    
     return (
-        <div className='submit-score'>
+        <>
+        {hideForm === true ? null
+        : <div className='submit-score'>
             <h3>SUBMIT YOUR SCORE</h3>
-            <form>
+            <form onSubmit={handleSubmit}>
             <label htmlFor='display-name'>DISPLAY NAME</label>
-            <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} placeholder={displayName} name='display_name' />
+            <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} value={displayName} />
             <label>TIME</label>
             <p>{seconds}s</p>
             <label>DIFFICULTY</label>
             <p>{difficulty}</p>
-            <Button className={clsx(classes.buttonRoot, className)} onSubmit={handleSubmit}>Submit</Button>
+            <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>
             </form>
-    </div>
+        </div>}
+            <Alert successMessage='Score Posted!' handleClose={handleClose} openSnackbar={openSnackbar} />
+        </>
     )
 }
 
