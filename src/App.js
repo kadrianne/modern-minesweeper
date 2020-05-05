@@ -8,6 +8,7 @@ import ScoreForm from './components/ScoreForm'
 function App() {
 
   const [gameState, setGameState] = useState('new')
+  const [newGame, setNewGame] = useState(false)
   const [difficulty, setDifficulty] = useState('Easy')
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
@@ -31,6 +32,13 @@ function App() {
   const resetTimer = () => {
     setSeconds(0)
     setTimerOn(false)
+  }
+
+  const startNewGame = () => setNewGame(true)
+  const resetGame = () => {
+    setNewGame(false)
+    setGameState('new')
+    setFlagsMarked(0)
   }
 
   const openScoreForm = () => setScoreFormOpen(true)
@@ -67,10 +75,12 @@ function App() {
     <div className={config[difficulty]['boardClass']}>
       <header>
           <FlagCounter difficulty={difficulty} flagsMarked={flagsMarked} />
-          <GameButton changeGameState={changeGameState} gameState={gameState} resetTimer={resetTimer} />
+          <GameButton startNewGame={startNewGame} gameState={gameState} resetTimer={resetTimer} />
           <Timer timerOn={timerOn} seconds={seconds} />
       </header>
       <Board 
+        newGame={newGame}
+        resetGame={resetGame}
         rows={config[difficulty]['rows']}
         columns={config[difficulty]['columns']}
         mines={config[difficulty]['mines']}

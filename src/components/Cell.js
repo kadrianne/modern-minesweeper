@@ -36,6 +36,12 @@ export default class Cell extends React.Component {
         )
     }
 
+    componentDidUpdate(){
+        if (this.props.revealed === false && this.state.bombClicked === true) {
+            this.setState({bombClicked: false})
+        }
+    }
+
     // pressedCell = (event) => {
     //     if (event.nativeEvent.which === 1){
     //         return this.setState({
