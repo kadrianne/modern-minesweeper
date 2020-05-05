@@ -1,6 +1,6 @@
 import React from 'react'
 import Cell from './Cell'
-import {getRandomInteger} from '../helpers.js'
+import { getRandomInteger } from '../helpers.js'
 
 export default class Board extends React.Component {
 
@@ -11,29 +11,9 @@ export default class Board extends React.Component {
         flagsBoard: []
     }
 
-    checkForWin = () => {
-        const {rows,columns,mines,changeGameState,stopTimer} = this.props
-        const cellStates = this.state.cellStates
-        const revealedCells = cellStates.reduce((cellsRevealed,row) => {
-            const rowValue = row.reduce((acc,currentValue) => {
-                if (currentValue == true){
-                    return acc + 1
-                } else {
-                    return acc
-                }
-            },0)
-            return cellsRevealed + rowValue
-        },0)
-
-        const totalCells = rows * columns - mines
-        if (revealedCells == totalCells){
-            changeGameState('won')
-        }
-    }
-
     lostGame = () => {
         const cellStates = this.state.cellStates
-        const {changeGameState,stopTimer} = this.props
+        const { changeGameState } = this.props
 
         this.state.minePositions.forEach(position => {
             const x = position.split(",")[0]
@@ -57,7 +37,7 @@ export default class Board extends React.Component {
     countFlagsMarked = () => {
         const flagsMarked = this.state.flagsBoard.reduce((flagsMarked,row) => {
             const rowValue = row.reduce((acc,currentValue) => {
-                if (currentValue == true){
+                if (currentValue === true){
                     return acc + 1
                 } else {
                     return acc
@@ -88,8 +68,8 @@ export default class Board extends React.Component {
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (this.state.cellStates[row][col] == false && this.state.flagsBoard[row][col] == false){
-                            if (this.state.boardValues[row][col] == '0'){
+                        if (this.state.cellStates[row][col] === false && this.state.flagsBoard[row][col] === false){
+                            if (this.state.boardValues[row][col] === 0){
                                 updatedCellState[row][col] = true
                                 this.checkAdjacentCells(row,col)
                             } else if (this.state.boardValues[row][col] !== '💣'){
@@ -113,7 +93,7 @@ export default class Board extends React.Component {
             if (row >= 0 && row <= 8){
                 cols.forEach(col => {
                     if (col >= 0 && col <= 8){
-                        if (boardValues[row][col] == '💣'){
+                        if (boardValues[row][col] === '💣'){
                             adjacentMines++
                         }
                     }
@@ -156,7 +136,6 @@ export default class Board extends React.Component {
                         revealed={this.state.cellStates[x][y]}
                         flagged={this.state.flagsBoard[x][y]}
                         lostGame={this.lostGame}
-                        checkForWin={this.checkForWin}
                         gameState={this.props.gameState}
                     />
                 )
@@ -190,7 +169,7 @@ export default class Board extends React.Component {
             let i = getRandomInteger(1,rows) - 1
             let j = getRandomInteger(1,columns) - 1
     
-            if (!minePositions.some(position => position == `${i},${j}`)) {
+            if (!minePositions.some(position => position === `${i},${j}`)) {
                 boardValues[i][j] = '💣'
                 minePositions.push(`${i},${j}`)
                 mineCount--
@@ -199,13 +178,33 @@ export default class Board extends React.Component {
 
         for (let x = 0; x < rows; x++){
             for (let y = 0; y < columns; y++){
-                if (boardValues[x][y] != '💣'){
+                if (boardValues[x][y] !== '💣'){
                     boardValues[x][y] = this.countMines(x,y,boardValues)
                 }
             }
         }
 
         this.setState({minePositions,boardValues,cellStates,flagsBoard})
+    }
+
+    checkForWin = () => {
+        const { rows,columns,mines,changeGameState } = this.props
+        const cellStates = this.state.cellStates
+        const revealedCells = cellStates.reduce((cellsRevealed,row) => {
+            const rowValue = row.reduce((acc,currentValue) => {
+                if (currentValue === true){
+                    return acc + 1
+                } else {
+                    return acc
+                }
+            },0)
+            return cellsRevealed + rowValue
+        },0)
+
+        const totalCells = rows * columns - mines
+        if (revealedCells === totalCells){
+            changeGameState('won')
+        }
     }
 
     componentDidUpdate(){

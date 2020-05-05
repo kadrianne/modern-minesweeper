@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
+import ScoreForm from './components/ScoreForm'
 
 function App() {
 
   const [gameState, setGameState] = useState('new')
-  const [difficulty, setDifficulty] = useState('easy')
+  const [difficulty, setDifficulty] = useState('Easy')
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
+  const [scoreFormOpen, setScoreFormOpen] = useState(false)
 
   const config = {
-    'easy': {
+    'Easy': {
       'mines': 10,
       'rows': 9,
       'columns': 9,
@@ -23,12 +25,16 @@ function App() {
 
   const changeGameState = (gameState) => setGameState(gameState)
   const updateFlagsMarked = (flagsMarked) => setFlagsMarked(flagsMarked)
+
   const startTimer = () => setTimerOn(true)
   const stopTimer = () => setTimerOn(false)
   const resetTimer = () => {
     setSeconds(0)
     setTimerOn(false)
   }
+
+  const openScoreForm = () => setScoreFormOpen(true)
+  const closeScoreForm = () => setScoreFormOpen(false)
 
   const displayText = () => {
     const text = {
@@ -41,7 +47,7 @@ function App() {
 
   useEffect(() => {
     let interval = null
-    if (timerOn == true){
+    if (timerOn === true){
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1)
       }, 1000)
@@ -51,6 +57,9 @@ function App() {
 
   useEffect(() => {
       stopTimer()
+      if (gameState === 'won') {
+        openScoreForm()
+      }
   }, [gameState])
   
   return (
@@ -72,7 +81,9 @@ function App() {
         startTimer={startTimer}
       />
     </div>
-    <p class={gameState}>{displayText()}</p>
+    <h2 className={gameState}>{displayText()}</h2>
+    <ScoreForm seconds={seconds} difficulty={difficulty}/> 
+    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty}/> : null}
     </>
   )
 }

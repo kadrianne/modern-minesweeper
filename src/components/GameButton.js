@@ -17,6 +17,6 @@ export default function GameButton(props){
     }
 
     return (
-        <button onClick={() => handleClick(props)}><span role='img'>{displayEmoji(props.gameState)}</span></button>
+        <button className='game-button' onClick={() => handleClick(props)}><span role='img'>{displayEmoji(props.gameState)}</span></button>
     )
 }
