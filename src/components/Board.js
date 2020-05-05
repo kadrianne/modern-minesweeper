@@ -235,10 +235,17 @@ export default class Board extends React.Component {
         }
     }
 
+    handleClick = () => {
+        const { gameState,startTimer } = this.props
+        if (gameState == 'new'){
+            startTimer()
+        }
+    }
+
     render(){
-        const {rows,columns,startTimer} = this.props
+        const { rows,columns } = this.props
         return (
-            <main className="board" onClick={startTimer}>
+            <main className="board" onClick={this.handleClick}>
                 {this.renderBoard(rows,columns)}
             </main>
         )
