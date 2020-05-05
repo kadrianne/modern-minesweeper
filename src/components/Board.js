@@ -137,6 +137,7 @@ export default class Board extends React.Component {
                         flagged={this.state.flagsBoard[x][y]}
                         lostGame={this.lostGame}
                         gameState={this.props.gameState}
+                        bombClicked={false}
                     />
                 )
             })
@@ -157,7 +158,7 @@ export default class Board extends React.Component {
         return board
     }
 
-    componentDidMount(){
+    boardSetup = () => {
         const {rows,columns,mines} = this.props
         const boardValues = this.createBoard(rows,columns)
         const cellStates = this.createBoard(rows,columns)
@@ -187,6 +188,10 @@ export default class Board extends React.Component {
         this.setState({minePositions,boardValues,cellStates,flagsBoard})
     }
 
+    componentDidMount(){
+        this.boardSetup()
+    }
+
     checkForWin = () => {
         const { rows,columns,mines,changeGameState } = this.props
         const cellStates = this.state.cellStates
@@ -209,6 +214,10 @@ export default class Board extends React.Component {
 
     componentDidUpdate(){
         this.checkForWin()
+        if (this.props.newGame === true) {
+            this.props.resetGame()
+            this.boardSetup()
+        }
     }
 
     render(){

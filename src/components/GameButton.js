@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function GameButton(props){
 
-    const handleClick = (props) => {
-        props.changeGameState('new')
-        props.resetTimer()
+    const handleClick = ({ startNewGame,resetTimer }) => {
+        startNewGame()
+        resetTimer()
     }
 
     const displayEmoji = (gameState) => {
