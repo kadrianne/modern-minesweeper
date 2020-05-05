@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
+const backendURL = 'http://localhost:4000'
 const styles = {
     buttonRoot: {
       background: '#a675cb',
@@ -30,21 +31,36 @@ function ScoreForm({ seconds,difficulty,classes,children,className }){
         setDisplayName(event.target.value)
     }
 
+    const postScore = (data) => {
+        fetch(`${backendURL}/scores`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
+
+        const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
+
+        postScore(formData)
     }
 
     return (
         <div className='submit-score'>
             <h3>SUBMIT YOUR SCORE</h3>
-            <form>
+            <form onSubmit={handleSubmit}>
             <label htmlFor='display-name'>DISPLAY NAME</label>
-            <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} placeholder={displayName} name='display_name' />
+            <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} value={displayName} />
             <label>TIME</label>
             <p>{seconds}s</p>
             <label>DIFFICULTY</label>
             <p>{difficulty}</p>
-            <Button className={clsx(classes.buttonRoot, className)} onSubmit={handleSubmit}>Submit</Button>
+            <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>
             </form>
     </div>
     )

@@ -39,6 +39,7 @@ function App() {
     setNewGame(false)
     setGameState('new')
     setFlagsMarked(0)
+    setScoreFormOpen(false)
   }
 
   const openScoreForm = () => setScoreFormOpen(true)
@@ -93,7 +94,7 @@ function App() {
     </div>
     <h2 className={gameState}>{displayText()}</h2>
     <ScoreForm seconds={seconds} difficulty={difficulty}/> 
-    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty}/> : null}
+    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty} closeScoreForm={closeScoreForm} /> : null}
     </>
   )
 }
