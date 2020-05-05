@@ -4,6 +4,7 @@ import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
 import ScoreForm from './components/ScoreForm'
+import ScoreBoard from './components/ScoreBoard'
 
 function App() {
 
@@ -91,6 +92,7 @@ function App() {
     </div>
     <h2 className={gameState}>{displayText()}</h2>
     {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty} /> : null}
+    <ScoreBoard />
     </>
   )
 }
