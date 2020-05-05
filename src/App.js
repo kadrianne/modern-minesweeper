@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
@@ -45,11 +45,9 @@ function App() {
     return text[gameState]
   }
 
-  // const displayScoreForm 
-
   useEffect(() => {
     let interval = null
-    if (timerOn == true){
+    if (timerOn === true){
       interval = setInterval(() => {
         setSeconds(seconds => seconds + 1)
       }, 1000)
@@ -59,7 +57,7 @@ function App() {
 
   useEffect(() => {
       stopTimer()
-      if (gameState == 'won') {
+      if (gameState === 'won') {
         openScoreForm()
       }
   }, [gameState])
@@ -85,7 +83,7 @@ function App() {
     </div>
     <h2 className={gameState}>{displayText()}</h2>
     <ScoreForm seconds={seconds} difficulty={difficulty}/> 
-    {scoreFormOpen == true ? <ScoreForm seconds={seconds} difficulty={difficulty}/> : null}
+    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty}/> : null}
     </>
   )
 }

@@ -1,16 +1,14 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-export default function FlagCounter(props){
+export default function FlagCounter({ difficulty,flagsMarked}){
 
     const totalMines = {
         'Easy': 10
     }
 
-    const [flagsLeft, setFlags] = useState(totalMines[props.difficulty])
-
     return (
         <div className='flag-counter'>
-            ❗️ {flagsLeft - props.flagsMarked}
+            <span>❗️</span> { totalMines[difficulty] - flagsMarked }
         </div>
     )
 }

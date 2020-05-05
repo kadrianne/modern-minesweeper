@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export default class Cell extends React.Component {
     state = {
@@ -7,10 +7,10 @@ export default class Cell extends React.Component {
     }
 
     checkValue = (event) => {
-        const {x,y,value,checkAdjacentCells,lostGame,checkForWin} = this.props
-        if (value == '0'){
+        const { x,y,value,checkAdjacentCells,lostGame } = this.props
+        if (value === 0){
             checkAdjacentCells(x,y)
-        } else if (value == '💣'){
+        } else if (value === '💣'){
             lostGame()
             this.setState({bombClicked: true})
         }
@@ -31,7 +31,7 @@ export default class Cell extends React.Component {
     showValue = () => {
         return (
             (this.props.revealed === true)
-            ? <span className={this.props.iconClass}>{this.props.value == '💣' ? <img src='../bomb.png'/> : this.props.value}</span> 
+            ? <span className={this.props.iconClass}>{this.props.value === '💣' ? <img src='../bomb.png' alt='bomb-emoji'/> : this.props.value}</span> 
             : null
         )
     }
@@ -56,8 +56,8 @@ export default class Cell extends React.Component {
                 id={`${this.props.x}-${this.props.y}`}
                 // onMouseDown={this.state.flagged === true ? null : this.pressedCell}
                 // onMouseOut={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.resetCell : null}
-                onClick={this.props.gameState == 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
-                onContextMenu={this.props.gameState == 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
+                onClick={this.props.gameState === 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
+                onContextMenu={this.props.gameState === 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
             >
                 {this.props.flagged === true ? '❗️' : null}
                 {this.showValue()}
