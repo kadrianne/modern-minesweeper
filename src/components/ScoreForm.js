@@ -25,7 +25,7 @@ const styles = {
     }
   };
 
-function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreForm }){
+function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores }){
 
     const [hideForm, setHideForm] = useState(false)
     const [displayName, setDisplayName] = useState('')
@@ -54,6 +54,14 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
         })
     }
 
+    const checkIfHighScore = (formData) => {
+        highScores.forEach(score => {
+            if (formData.time <= score.time){
+                fetchHighScores()
+            }
+        })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         setOpenSnackbar(true)
@@ -62,6 +70,7 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
         const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
         
         postScore(formData)
+        checkIfHighScore(formData)
     }
     
     return (

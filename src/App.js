@@ -4,6 +4,9 @@ import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
 import ScoreForm from './components/ScoreForm'
+import ScoreBoard from './components/ScoreBoard'
+
+const backendURL = 'http://localhost:4000'
 
 function App() {
 
@@ -14,6 +17,8 @@ function App() {
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
+  const [highScores, setHighScores] = useState([])
+  const [highScoreToggle, setHighScoreToggle] = useState(false)
 
   const config = {
     'Easy': {
@@ -42,6 +47,8 @@ function App() {
     setScoreFormOpen(false)
   }
 
+  const addToHighScores = () => setHighScoreToggle(!highScoreToggle)
+
   const displayText = () => {
     const text = {
       'won': '🎉 YOU WIN 🎉',
@@ -67,30 +74,46 @@ function App() {
         setScoreFormOpen(true)
       }
   }, [gameState])
+
+  const fetchHighScores = () => {
+    fetch(`${backendURL}/highscores/${difficulty}`)
+        .then(response => response.json())
+        .then(setHighScores)
+  }
+
+  useEffect(() => {
+    fetchHighScores()
+  },[])
   
   return (
     <>
-    <div className={config[difficulty]['boardClass']}>
-      <header>
-          <FlagCounter difficulty={difficulty} flagsMarked={flagsMarked} />
-          <GameButton startNewGame={startNewGame} gameState={gameState} resetTimer={resetTimer} />
-          <Timer timerOn={timerOn} seconds={seconds} />
-      </header>
-      <Board 
-        newGame={newGame}
-        resetGame={resetGame}
-        rows={config[difficulty]['rows']}
-        columns={config[difficulty]['columns']}
-        mines={config[difficulty]['mines']}
-        changeGameState={changeGameState}
-        gameState={gameState}
-        difficulty={difficulty}
-        updateFlagsMarked={updateFlagsMarked}
-        startTimer={startTimer}
-      />
+    <div className='left-container'>
+      <h1>💣 MINESWEEPER 💣</h1>
+      <div className={config[difficulty]['boardClass']}>
+        <header>
+            <FlagCounter difficulty={difficulty} flagsMarked={flagsMarked} />
+            <GameButton startNewGame={startNewGame} gameState={gameState} resetTimer={resetTimer} />
+            <Timer timerOn={timerOn} seconds={seconds} />
+        </header>
+        <Board 
+          newGame={newGame}
+          resetGame={resetGame}
+          rows={config[difficulty]['rows']}
+          columns={config[difficulty]['columns']}
+          mines={config[difficulty]['mines']}
+          changeGameState={changeGameState}
+          gameState={gameState}
+          difficulty={difficulty}
+          updateFlagsMarked={updateFlagsMarked}
+          startTimer={startTimer}
+        />
+      </div>
+      <h2 className={gameState}>{displayText()}</h2>
+      {scoreFormOpen === true ? <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     </div>
-    <h2 className={gameState}>{displayText()}</h2>
-    {scoreFormOpen === true ? <ScoreForm seconds={seconds} difficulty={difficulty} /> : null}
+    <div className='right-container'>
+      <ScoreBoard highScores={highScores} difficulty={difficulty} />
+    </div>
     </>
   )
 }

@@ -1,37 +1,100 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,900;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* End of Meyer Reset */
+
+
+body {
   padding: 10px;
   background-color: linen;
 }
 
+.left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
 h1 {
+  margin: 25px 0;
   font-size: 48px;
   color: rgb(40, 191, 221);
   font-family: 'Raleway', sans-serif;
 }
 
 h2 {
+  margin: 25px 0;
   font-size: 48px;
   font-weight: 700;
   font-family: 'Raleway', sans-serif;
 }
 
 h3 {
+  margin: 5px 0;
   font-size: 24px;
   color: #a675cb;
   font-family: 'Raleway', sans-serif;
-  margin: 0px
+}
+
+h4 {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 #root {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
   padding: 10px;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -79,10 +142,21 @@ header {
   display: flex;
   flex-direction: column;
   border: 3px outset hsl(190,80%,50%);
-  padding: 5px;
-  margin: 5px;
+  padding: 10px;
+  margin: 10px;
   font-size: 16px;
   font-weight: 500;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px outset hsl(190,80%,50%);
+  padding: 10px;
+  margin: 25px;
+  width: 250px;
+  font-size: 16px;
 }
 
 .small-board {
@@ -102,7 +176,7 @@ form {
 }
 
 label {
-  font-weight: 700;
+  font-weight: 500;
   margin: 5px;
 }
 
@@ -137,7 +211,7 @@ label {
 img {
   width: 12px;
   height: 12px;
-  padding: 4px;
+  padding: 2px;
 }
 
 .revealed {
@@ -145,7 +219,8 @@ img {
   border-style: solid;
   border-color: linen;
   background-color: rgb(199, 228, 247);
-  font-size: 14px;
+  font-size: 15px;
+  padding-top: 2px;
 }
 
 .pressed {
@@ -196,4 +271,17 @@ p {
   margin: 5px;
   font-size: 16px;
   font-weight: 300;
+}
+
+ol {
+  list-style-type: decimal;
+  margin: 5px 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.flag {
+  margin-top: 5px;
 }

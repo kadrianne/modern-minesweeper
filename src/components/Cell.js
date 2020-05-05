@@ -58,14 +58,14 @@ export default class Cell extends React.Component {
 
     render(){
         return (
-            <div className={`cell ${this.props.revealed === true ? `revealed` : ''} ${this.state.bombClicked === true ? `bomb` : null}`}
+            <div className={`cell ${this.props.revealed === true ? `revealed` : ''} ${this.state.bombClicked === true ? `bomb` : ''}`}
                 id={`${this.props.x}-${this.props.y}`}
                 // onMouseDown={this.state.flagged === true ? null : this.pressedCell}
                 // onMouseOut={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.resetCell : null}
                 onClick={this.props.gameState === 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
                 onContextMenu={this.props.gameState === 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
             >
-                {this.props.flagged === true ? '❗️' : null}
+                {this.props.flagged === true ? <div class='flag'>❗</div> : null}
                 {this.showValue()}
             </div>
         )
