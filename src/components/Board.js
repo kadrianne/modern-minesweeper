@@ -192,6 +192,20 @@ export default class Board extends React.Component {
         this.boardSetup()
     }
 
+    flagCellsWithMines = () => {
+        const flagsBoard = this.state.flagsBoard
+
+        this.state.minePositions.forEach(position => {
+            const x = position.split(",")[0]
+            const y = position.split(",")[1]
+
+            flagsBoard[x][y] = true
+        })
+
+        this.props.updateFlagsMarked(this.state.minePositions.length)
+        // this.setState({flagsBoard})
+    }
+
     checkForWin = () => {
         const { rows,columns,mines,changeGameState } = this.props
         const cellStates = this.state.cellStates
@@ -209,6 +223,7 @@ export default class Board extends React.Component {
         const totalCells = rows * columns - mines
         if (revealedCells === totalCells){
             changeGameState('won')
+            this.flagCellsWithMines()
         }
     }
 
@@ -220,10 +235,17 @@ export default class Board extends React.Component {
         }
     }
 
+    handleClick = () => {
+        const { gameState,startTimer } = this.props
+        if (gameState == 'new'){
+            startTimer()
+        }
+    }
+
     render(){
-        const {rows,columns,startTimer} = this.props
+        const { rows,columns } = this.props
         return (
-            <main className="board" onClick={startTimer}>
+            <main className="board" onClick={this.handleClick}>
                 {this.renderBoard(rows,columns)}
             </main>
         )
