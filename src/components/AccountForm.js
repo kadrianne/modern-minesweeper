@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,10 +7,18 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function AccountForm({ title,content,open,handleClose }) {
+export default function AccountForm({ title,content,open,handleClose,handleSubmit }) {
+  const [username, setUsername] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleUsername = (event) => setUsername(event.target.value)
+  const handleDisplayName = (event) => setDisplayName(event.target.value)
+  const handlePassword = (event) => setPassword(event.target.value)
+
   return (
-    <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <form onSubmit={(event) => handleSubmit(event,username,password,displayName)}>
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{content}</DialogContentText>
@@ -20,14 +28,28 @@ export default function AccountForm({ title,content,open,handleClose }) {
                 id="username"
                 label="Username"
                 type="text"
+                onChange={handleUsername}
+                value={username}
                 fullWidth
             />
+            {title === 'REGISTER' ? <TextField
+                autoFocus
+                margin="dense"
+                id="display-name"
+                label="Display Name"
+                type="text"
+                onChange={handleDisplayName}
+                value={displayName}
+                fullWidth
+            /> : null}
             <TextField
                 autoFocus
                 margin="dense"
                 id="password"
                 label="Password"
-                type="text"
+                type="password"
+                onChange={handlePassword}
+                value={password}
                 fullWidth
             />
         </DialogContent>
@@ -35,11 +57,11 @@ export default function AccountForm({ title,content,open,handleClose }) {
           <Button onClick={handleClose} color="primary">
             CANCEL
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button type='submit' color="primary">
             {title}
           </Button>
         </DialogActions>
-      </Dialog>
-    </div>
+      </form>
+    </Dialog>
   );
 }
