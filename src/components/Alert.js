@@ -26,8 +26,8 @@ export default function CustomizedSnackbars(props) {
         Open success snackbar
       </Button> */}
       <Snackbar open={props.openSnackbar} autoHideDuration={5000} onClose={props.handleClose}>
-        <Alert onClose={props.handleClose} severity="success">
-          {props.successMessage}
+        <Alert onClose={props.handleClose} severity={props.severity}>
+          {props.message}
         </Alert>
       </Snackbar>
     </div>
