@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from 'react'
+import Button from '@material-ui/core/Button';
 import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
 import ScoreForm from './components/ScoreForm'
 import ScoreBoard from './components/ScoreBoard'
+import CreateAccountForm from './components/CreateAccountForm'
+
 
 const backendURL = 'http://localhost:4000'
 
@@ -84,6 +87,16 @@ function App() {
   useEffect(() => {
     fetchHighScores()
   },[])
+
+  const [openCreateAccountForm, setOpenCreateAccountForm] = useState(false);
+
+  const handleRegisterClick = () => {
+    setOpenCreateAccountForm(true);
+  };
+
+  const handleRegisterClose = () => {
+    setOpenCreateAccountForm(false);
+  };
   
   return (
     <>
@@ -113,6 +126,17 @@ function App() {
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
+      <section className='user-container'>
+      <Button className='mui-button' variant="outlined" color="primary" onClick={handleRegisterClick}>
+        LOGIN
+      </Button>
+      <p>OR</p>
+      <Button variant="outlined" color="primary" onClick={handleRegisterClick}>
+        REGISTER
+      </Button>
+      <p>TO VIEW AND SAVE YOUR SCORES</p>
+      </section>
+      <CreateAccountForm open={openCreateAccountForm} handleClose={handleRegisterClose} />
     </div>
     </>
   )
