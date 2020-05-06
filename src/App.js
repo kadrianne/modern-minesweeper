@@ -5,6 +5,7 @@ import FlagCounter from './components/FlagCounter'
 import Timer from './components/Timer'
 import ScoreForm from './components/ScoreForm'
 import ScoreBoard from './components/ScoreBoard'
+import UserContainer from './components/UserContainer'
 
 const backendURL = 'http://localhost:4000'
 
@@ -18,7 +19,6 @@ function App() {
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
-  const [highScoreToggle, setHighScoreToggle] = useState(false)
 
   const config = {
     'Easy': {
@@ -46,8 +46,6 @@ function App() {
     setFlagsMarked(0)
     setScoreFormOpen(false)
   }
-
-  const addToHighScores = () => setHighScoreToggle(!highScoreToggle)
 
   const displayText = () => {
     const text = {
@@ -113,9 +111,10 @@ function App() {
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
+      <UserContainer />
     </div>
     </>
   )
 }
 
-export default App;
+export default App
