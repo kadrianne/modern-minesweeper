@@ -56,7 +56,7 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
 
     const checkIfHighScore = (formData) => {
         highScores.forEach(score => {
-            if (formData.time <= score.time){
+            if (formData.time <= score.time || highScores.length < 10){
                 fetchHighScores()
             }
         })
