@@ -12,5 +12,5 @@ export default function useHandleDialog(){
         setOpen(false)
     }
     
-    return [open,handleClick,handleClose]
+    return [open,setOpen,handleClick,handleClose]
 }

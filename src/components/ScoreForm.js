@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Alert from './Alert'
+import useHandleSnackbar from '../hooks/handleSnackbar';
 
 const backendURL = 'http://localhost:4000'
 const styles = {
@@ -29,15 +30,7 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
 
     const [hideForm, setHideForm] = useState(false)
     const [displayName, setDisplayName] = useState('')
-    const [openSnackbar, setOpenSnackbar] = useState(false)
-
-    const handleClose = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-  
-      setOpenSnackbar(false);
-    }
+    const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
 
     const handleChange = (event) => {
         setDisplayName(event.target.value)
@@ -88,7 +81,7 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
             <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>
             </form>
         </div>}
-            <Alert successMessage='Score Posted!' handleClose={handleClose} openSnackbar={openSnackbar} />
+            <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
         </>
     )
 }
