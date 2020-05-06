@@ -1,12 +1,16 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import CreateAccountForm from './CreateAccountForm'
+import AccountForm from './AccountForm'
+import useHandleDialog from '../hooks/handleDialog'
 
-export default function UserContainer({ handleRegisterClose,handleRegisterClick,openCreateAccountForm }){
+export default function UserContainer(){
+    const [openRegisterForm, handleRegisterClick, handleRegisterClose] = useHandleDialog()
+    const [openLoginForm, handleLoginClick, handleLoginClose] = useHandleDialog()
+
     return (
         <>
         <section className='user-container'>
-            <Button className='mui-button' variant="outlined" color="primary" onClick={handleRegisterClick}>
+            <Button className='mui-button' variant="outlined" color="primary" onClick={handleLoginClick}>
                 LOGIN
             </Button>
             <p>OR</p>
@@ -15,7 +19,8 @@ export default function UserContainer({ handleRegisterClose,handleRegisterClick,
             </Button>
             <p>TO VIEW AND SAVE YOUR SCORES</p>
         </section>
-        <CreateAccountForm open={openCreateAccountForm} handleClose={handleRegisterClose} />
+        <AccountForm title='REGISTER' content='Create an account.' open={openRegisterForm} handleClose={handleRegisterClose} />
+        <AccountForm title='LOGIN' content='Login to save and view your scores.' open={openLoginForm} handleClose={handleLoginClose} />
         </>
     )
 }

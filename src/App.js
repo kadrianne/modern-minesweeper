@@ -19,7 +19,6 @@ function App() {
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
-  const [openCreateAccountForm, setOpenCreateAccountForm] = useState(false);
 
   const config = {
     'Easy': {
@@ -55,14 +54,6 @@ function App() {
     }
 
     return text[gameState]
-  }
-
-  const handleRegisterClick = () => {
-    setOpenCreateAccountForm(true)
-  }
-
-  const handleRegisterClose = () => {
-    setOpenCreateAccountForm(false)
   }
 
   useEffect(() => {
@@ -120,7 +111,7 @@ function App() {
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer handleRegisterClick={handleRegisterClick} handleRegisterClose={handleRegisterClose} openCreateAccountForm={openCreateAccountForm} />
+      <UserContainer />
     </div>
     </>
   )
