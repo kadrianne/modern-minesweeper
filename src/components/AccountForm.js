@@ -27,7 +27,7 @@ export default function AccountForm({ title,content,open,handleClose,handleSubmi
   return (
     <>
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <form ref={form => form} onSubmit={(event) => {
+      <form onSubmit={(event) => {
         resetForm()
         handleSubmit(event,username,password,displayName)
       }}>
