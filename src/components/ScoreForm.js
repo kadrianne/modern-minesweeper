@@ -44,15 +44,15 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
                 'Accept': 'application/json'
             },
             body: JSON.stringify(data)
-        })
+        }).then(response => response.json())
+            .then(results => checkIfHighScore(results.score[0].time))
     }
 
-    const checkIfHighScore = (formData) => {
-        highScores.forEach(score => {
-            if (formData.time <= score.time || highScores.length < 10){
-                fetchHighScores()
-            }
-        })
+    const checkIfHighScore = (time) => {
+        const isHighScore = highScores.find(score => time <= score.time)
+        if (highScores.length < 10 || isHighScore ){
+            fetchHighScores()
+        }
     }
 
     const handleSubmit = (event) => {
@@ -63,7 +63,7 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
         const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
         
         postScore(formData)
-        checkIfHighScore(formData)
+        // checkIfHighScore(formData)
     }
     
     return (
