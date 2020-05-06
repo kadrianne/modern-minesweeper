@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import AccountForm from './AccountForm'
 import Alert from './Alert'
@@ -19,18 +19,23 @@ export default function UserContainer(){
         alertMessage,
         setAlertMessage
     ] = useHandleSnackbar(false)
+    const [userLoggedIn, setUserLoggedIn] = useState('false')
 
     const handleResponse = (response) => {
-        if (response.status === 201){
+        if (response.status.match(/^20/)){
             setAlertSeverity('success')
-            setAlertMessage('User successfully created.')
-            setOpenSnackbar(true)
             setOpenRegisterForm(false)
-        } else if (response.status === 409){
+            setOpenLoginForm(false)
+            if (response.token){
+                localStorage.setItem('token', response.token)
+                setUserLoggedIn(true)
+            }
+        } else if (response.status.match(/^40/)){
             setAlertSeverity('error')
-            setAlertMessage(response.message)
-            setOpenSnackbar(true)
         }
+
+        setAlertMessage(response.message)
+        setOpenSnackbar(true)
     }
 
     const createUser = (data) => {
@@ -51,13 +56,26 @@ export default function UserContainer(){
         const formData = {username,password,display_name}
 
         createUser(formData)
-      }
+    }
+
+    const loginUser = (data) => {
+        fetch(`${backendURL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+            .then(handleResponse)
+    }
 
     const handleLoginSubmit = (event,username,password) => {
         event.preventDefault()
 
         const formData = {username,password}
         
+        loginUser(formData)
     }
 
     return (
