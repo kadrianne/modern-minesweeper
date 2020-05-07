@@ -10,7 +10,7 @@ export default function UserContainer({ difficulty,userLoggedIn,setUserLoggedIn,
         <>
         {userLoggedIn === false
         ? <AccountContainer setUserLoggedIn={setUserLoggedIn} setLoggedInUser={setLoggedInUser} /> 
-        : <UserStats difficulty={difficulty} loggedInUser={loggedInUser} />
+        : <UserStats difficulty={difficulty} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setUserLoggedIn={setUserLoggedIn} />
         }
         </>
     )

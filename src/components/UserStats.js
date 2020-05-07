@@ -1,10 +1,14 @@
 import React, { useState,useEffect } from 'react'
+import Button from '@material-ui/core/Button'
+import Alert from './Alert'
+import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = `http://localhost:4000`
 
-export default function UserStats({ difficulty,loggedInUser }){
+export default function UserStats({ difficulty,loggedInUser,setUserLoggedIn,setLoggedInUser }){
 
     const [userScores, setUserScores] = useState([])
+    const [openSnackbar,setOpenSnackbar,handleClose,alertSeverity,setAlertSeverity,alertMessage,setAlertMessage] = useHandleSnackbar()
 
     const getFastestTime = () => {
         return `${Math.min(...userScores)}s`
@@ -25,19 +29,32 @@ export default function UserStats({ difficulty,loggedInUser }){
             .then(user => setUserScores(user.scores.map(score => score.time)))
     }
 
+    const logout = () => {
+        setUserLoggedIn(false)
+        setLoggedInUser({})
+        setAlertMessage('User successfully logged out.')
+    }
+
     useEffect(() => {
         getUsersScores()
     },[])
 
     return (
+        <>
         <section className='user-stats'>
-            <h3>{`${loggedInUser.username}`.toUpperCase()}'S STATS</h3>
+            <h3>{`${loggedInUser.display_name}`.toUpperCase()}'S STATS</h3>
             <h4>DIFFICULTY: {difficulty.toUpperCase()}</h4>
             <ul>
                 <li>Fastest Time ≫ <span class='stat'>{userScores.length === 0 ? 'N/A' : getFastestTime()}</span></li>
                 <li>Average Time ≫ <span class='stat'>{userScores.length === 0 ? 'N/A' : getAverageTime()}</span></li>
                 <li>Games Won ≫ <span class='stat'>{userScores.length}</span></li>
             </ul>
+            <p class='login-text'>{`LOGGED IN AS ${loggedInUser.username}`.toUpperCase()}</p> 
+            <Button variant="outlined" color="primary" onClick={logout}>
+                LOGOUT
+            </Button>
         </section>
+        <Alert message={alertMessage} severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
+        </>
     )
 }
