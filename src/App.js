@@ -91,7 +91,7 @@ function App() {
         <header>
             <FlagCounter difficulty={difficulty} flagsMarked={flagsMarked} />
             <GameButton startNewGame={startNewGame} gameState={gameState} resetTimer={resetTimer} />
-            <Timer timerOn={timerOn} seconds={seconds} />
+            <Timer seconds={seconds} />
         </header>
         <Board 
           newGame={newGame}
@@ -107,11 +107,12 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
+      <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} />
       {scoreFormOpen === true ? <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer />
+      <UserContainer difficulty={difficulty} />
     </div>
     </>
   )

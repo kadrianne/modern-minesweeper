@@ -20,8 +20,9 @@ const styles = {
         }
     },
     inputRoot: {
+        color: '#ff3a3a',
         '&:after': {
-            borderBottom: '2px solid hsl(190,80%,50%)'
+            borderBottom: '2px solid #ff3a3a'
         }
     }
   };
