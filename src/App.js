@@ -18,7 +18,10 @@ function App() {
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
+  const [hideScoreForm, setHideScoreForm] = useState(false)
   const [highScores, setHighScores] = useState([])
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [loggedInUser, setLoggedInUser] = useState({})
 
   const config = {
     'Easy': {
@@ -107,12 +110,11 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} />
-      {scoreFormOpen === true ? <ScoreForm fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm gameState={gameState} hideScoreForm={hideScoreForm} setHideScoreForm={setHideScoreForm} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer difficulty={difficulty} />
+      <UserContainer difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
     </div>
     </>
   )

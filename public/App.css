@@ -180,6 +180,7 @@ header {
   font-size: 14px;
   text-align: center;
   margin: 10px;
+  color: #000;
 }
 
 .user-stats {
@@ -212,7 +213,7 @@ form {
 
 label {
   font-weight: 400;
-  margin: 10px;
+  padding: 10px;
 }
 
 .game-button {

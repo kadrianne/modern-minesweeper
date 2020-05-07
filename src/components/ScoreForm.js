@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Button,Input } from '@material-ui/core'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -27,9 +27,8 @@ const styles = {
     }
   };
 
-function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores }){
+function ScoreForm({ gameState,seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores,loggedInUser,userLoggedIn,hideScoreForm,setHideScoreForm }){
 
-    const [hideForm, setHideForm] = useState(false)
     const [displayName, setDisplayName] = useState('')
     const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
 
@@ -59,27 +58,36 @@ function ScoreForm({ seconds,difficulty,classes,children,className,closeScoreFor
     const handleSubmit = (event) => {
         event.preventDefault()
         setOpenSnackbar(true)
-        setHideForm(true)
-        
-        const formData = {display_name: displayName, time: seconds, difficulty: difficulty}
-        
-        postScore(formData)
-        // checkIfHighScore(formData)
+        setHideScoreForm(true) 
+
+        const data = {display_name: displayName, time: seconds, difficulty: difficulty}
+
+        postScore(data)
     }
     
+    useEffect(() => {
+        if (gameState === 'won' && userLoggedIn === true){
+            const data = {display_name: loggedInUser.display_name, time: seconds, difficulty: difficulty, user_id: loggedInUser.id}
+            postScore(data)
+        }
+    },[loggedInUser])
+
     return (
         <>
-        {hideForm === true ? null
+        {hideScoreForm === true ? null
         : <div className='submit-score'>
-            <h3>SUBMIT YOUR SCORE</h3>
+            <h3>{userLoggedIn === true ? 'YOUR SCORE' : 'SUBMIT YOUR SCORE'}</h3>
             <form onSubmit={handleSubmit}>
             <label htmlFor='display-name'>DISPLAY NAME</label>
-            <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} value={displayName} />
+            {userLoggedIn === true 
+                ? <p>{loggedInUser.display_name}</p>
+                : <Input id='display-name' className={clsx(classes.inputRoot, className)} onChange={handleChange} value={displayName} />
+            }
             <label>TIME</label>
             <p>{seconds}s</p>
             <label>DIFFICULTY</label>
             <p>{difficulty}</p>
-            <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>
+            {userLoggedIn === true ? null : <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>}
             </form>
         </div>}
             <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />

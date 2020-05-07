@@ -7,11 +7,11 @@ export default function UserStats({ difficulty,loggedInUser }){
     const [userScores, setUserScores] = useState([])
 
     const getFastestTime = () => {
-        return Math.min(...userScores)
+        return `${Math.min(...userScores)}s`
     }
 
     const getAverageTime = () => {
-        return Math.round(userScores.reduce((acc,score) => acc + score,0) / userScores.length)
+        return `${Math.round(userScores.reduce((acc,score) => acc + score,0) / userScores.length)}s`
     }
 
     const getUsersScores = () => {
@@ -34,9 +34,9 @@ export default function UserStats({ difficulty,loggedInUser }){
             <h3>{`${loggedInUser.username}`.toUpperCase()}'S STATS</h3>
             <h4>DIFFICULTY: {difficulty.toUpperCase()}</h4>
             <ul>
-                <li>Fastest Time ≫≫ <span class='stat'>{getFastestTime()}s</span></li>
-                <li>Average Time ≫≫ <span class='stat'>{getAverageTime()}s</span></li>
-                <li>Games Won ≫≫ <span class='stat'>{userScores.length}</span></li>
+                <li>Fastest Time ≫ <span class='stat'>{userScores.length === 0 ? 'N/A' : getFastestTime()}</span></li>
+                <li>Average Time ≫ <span class='stat'>{userScores.length === 0 ? 'N/A' : getAverageTime()}</span></li>
+                <li>Games Won ≫ <span class='stat'>{userScores.length}</span></li>
             </ul>
         </section>
     )
