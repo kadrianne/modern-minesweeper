@@ -10,19 +10,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Frontend: HTML, CSS, JavaScript, React v16.13.1, [Material UI](https://material-ui.com/)<br>
 Backend: Node.js v13.8.0, Express.js v4.17.1, Knex.js v0.21.1, Objection.js v2.1.3, PostgreSQL v12.2
 
-## Game Play
+## Game Features
 
 ### Board Setup
 
 On load or start of a new game, the board is setup to create a grid based on the difficulty level's number of rows and columns, randomize the placement of mines, and assign the values of cells based on adjacent mine placements.
 
-### Classic Features
+### Classic Game Play
 
 On click of a cell, a value or mine is revealed. If the cell revealed is a 0 (blank) value, the adjacent non-mine cells are also revealed.
 
 The game header contains a Game Button to reset the game, a Timer that tracks seconds when a game is started, and a Flag Counter indicating the number of mines hidden.
 
 On right click of a cell, the cell will be flagged and the flag counter will be reduced from the number of marked mines.
+
+![game-play](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588965376/minesweeper/gameplay.gif)
 
 ### Game Loss
 
@@ -46,6 +48,8 @@ A user can create an account or login with an existing account. With an account 
 ### High Scores
 
 The high scores are retrieved from saved scores in the database. The top 10 scores for the selected difficulty level are shown. If a new score is posted that is one of the top 10 scores, the Scoreboard will automatically update with the posted score.
+
+![high-score](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588965470/minesweeper/highscore.gif)
 
 ## Challenges
 
