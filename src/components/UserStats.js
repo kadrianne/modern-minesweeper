@@ -5,9 +5,8 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = `http://localhost:4000`
 
-export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUserLoggedIn,setLoggedInUser,userLoggedOut,setUserLoggedOut }){
+export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUserLoggedIn,setLoggedInUser,setUserLoggedOut,userScores,setUserScores }){
 
-    const [userScores, setUserScores] = useState([])
     const [fastestTime, setFastestTime] = useState(0)
     const [averageTime, setAverageTime] = useState(0)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
@@ -39,10 +38,12 @@ export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUser
             getUsersScores()
         }
     },[userLoggedIn])
-
+    
     useEffect(() => {
-        getFastestTime()
-        getAverageTime()
+        if (userScores.length > 0){
+            getFastestTime()
+            getAverageTime()
+        }
     },[userScores])
 
     return (
