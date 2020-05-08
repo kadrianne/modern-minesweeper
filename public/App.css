@@ -251,7 +251,7 @@ img {
 }
 
 .revealed {
-  border-width: 1px 1px 0px 0px;
+  border-width: 1px 0px 0px 1px;
   border-style: solid;
   border-color: linen;
   background-color: rgb(199, 228, 247);
