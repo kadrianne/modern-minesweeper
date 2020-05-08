@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +24,7 @@ export default function CustomizedSnackbars(props) {
       {/* <Button variant="outlined" onClick={handleClick}>
         Open success snackbar
       </Button> */}
-      <Snackbar open={props.openSnackbar} autoHideDuration={5000} onClose={props.handleClose}>
+      <Snackbar open={props.openSnackbar} autoHideDuration={3000} onClose={props.handleClose}>
         <Alert onClose={props.handleClose} severity={props.severity}>
           {props.message}
         </Alert>

@@ -4,8 +4,6 @@ import UserStats from './UserStats'
 import Alert from './Alert'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
-const backendURL = 'http://localhost:4000'
-
 export default function UserContainer({ difficulty,userLoggedIn,setUserLoggedIn,loggedInUser,setLoggedInUser }){
 
     const [userLoggedOut, setUserLoggedOut] = useState(false)

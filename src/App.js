@@ -84,7 +84,7 @@ function App() {
 
   useEffect(() => {
     fetchHighScores()
-  },[])
+  })
   
   return (
     <>
