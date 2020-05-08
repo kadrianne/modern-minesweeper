@@ -52,6 +52,7 @@ function App() {
     setGameState('new')
     setFlagsMarked(0)
     setScoreFormOpen(false)
+    setScoreSubmitted(false)
   }
 
   const displayText = () => {
