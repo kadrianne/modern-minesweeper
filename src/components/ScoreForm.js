@@ -18,9 +18,9 @@ const styles = {
         }
     },
     inputRoot: {
-        color: '#ff3a3a',
+        color: '#11a0bd',
         '&:after': {
-            borderBottom: '2px solid #ff3a3a'
+            borderBottom: '2px solid hsl(190,80%,50%)'
         }
     }
   };

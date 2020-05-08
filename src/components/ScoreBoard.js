@@ -9,7 +9,7 @@ export default function ScoreBoard({ highScores,difficulty }){
     }
 
     return (
-        <div class='scoreboard'>
+        <div className='scoreboard'>
             <h3>HIGH SCORES</h3>
             <h4>DIFFICULTY: {difficulty.toUpperCase()}</h4>
             <ol>
