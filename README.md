@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 💣 Modern Minesweeper 💣
 
-## Available Scripts
+A refreshed take on the classic Minesweeper computer game. The game is reskinned with fun colors and emojis and has the same basic gameplay.
 
-In the project directory, you can run:
+Backend respository: https://github.com/kadrianne/minesweeper-express-backend
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Built With
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br>
+Frontend: HTML, CSS, JavaScript, React v16.13.1, [Material UI](https://material-ui.com/)<br>
+Backend: Node.js v13.8.0, Express.js v4.17.1, Knex.js v0.21.1, Objection.js v2.1.3, PostgreSQL v12.2
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Game Features
 
-### `yarn test`
+### Board Setup
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+On load or start of a new game, the board is setup to create a grid based on the difficulty level's number of rows and columns, randomize the placement of mines, and assign the values of cells based on adjacent mine placements.
 
-### `yarn build`
+### Classic Game Play
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+On click of a cell, a value or mine is revealed. If the cell revealed is a 0 (blank) value, the adjacent non-mine cells are also revealed.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The game header contains a Game Button to reset the game, a Timer that tracks seconds when a game is started, and a Flag Counter indicating the number of mines hidden.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+On right click of a cell, the cell will be flagged and the flag counter will be reduced from the number of marked mines.
 
-### `yarn eject`
+![game-play](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588965376/minesweeper/gameplay.gif)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Game Loss
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+On click of a mine, the game is lost indicated by the crying face emoji on the Game Button and 'YOU LOSE' appearing below the board. All of the mines are revealed on the board with the mine clicked in red.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![game-loss](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588963539/minesweeper/loss.gif)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Game Win
 
-## Learn More
+The game is won when all non-mine cells are revealed. All of the unrevealed mine cells will be automatically flagged. The Game Button emoji will change to an emoji face with sunglasses and 'YOU WIN' will appear below the board as well as your score information to be posted.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![game-win](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588964201/minesweeper/win.gif)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Account Features
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+A user can create an account or login with an existing account. With an account a user can see their statistics of fastest time, average time, and number of games won. While a user is logged in, on win of a game, their score will automatically be save and their statistics updated. Validation is also setup for existing usernames on account creation and incorrect username or password on login.
 
-### Analyzing the Bundle Size
+![account](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588964874/minesweeper/account.gif)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### High Scores
 
-### Making a Progressive Web App
+The high scores are retrieved from saved scores in the database. The top 10 scores for the selected difficulty level are shown. If a new score is posted that is one of the top 10 scores, the Scoreboard will automatically update with the posted score.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+![high-score](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588965470/minesweeper/highscore.gif)
 
-### Advanced Configuration
+## Challenges
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Being able to reset the board ended up being the last main feature implemented as my understanding of lifecycle methods was a bit limited when I started this project. As I learned hooks and understood the React lifecycle process further, this functionality clicked.
 
-### Deployment
+State management became very challenging as there are multiple states that needed to be shared between sibling components. So a lot of these states are currently being tracked in the parent App component and being passed down as props. Also, with conditional rendering of certain components, some Alert components had to be rendered in their parent components as well.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Future Implementation
+- Deployment to production server
+- Create boards of increased difficulty (intermediate, hard)
+- Add keyboard controls
+- Implement Redux for state management
+- Refactoring algorithms
 
-### `yarn build` fails to minify
+## Collaboration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Fork and/or clone this repo & the backend repo - https://github.com/kadrianne/minesweeper-express-backend
+2. Install dependencies: `npm install`
+3. Create PostgreSQL database `createdb minesweeper`
+4. Run backend server: `node index.js`
+5. Migrate database tables: `npx knex migrate:latest`
+6. Run frontend server: `npm start`
+7. Checkout new branch
+   
+I have a GitHub project board with a few backlog items here: https://github.com/kadrianne/modern-minesweeper/projects/1<br>
+If you'd like to collaborate on this project, please email me: kristine.a.du@gmail.com
