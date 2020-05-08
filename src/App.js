@@ -6,6 +6,8 @@ import Timer from './components/Timer'
 import ScoreForm from './components/ScoreForm'
 import ScoreBoard from './components/ScoreBoard'
 import UserContainer from './components/UserContainer'
+import Alert from './components/Alert'
+import useHandleSnackbar from './hooks/handleSnackbar'
 
 const backendURL = 'http://localhost:4000'
 
@@ -18,11 +20,11 @@ function App() {
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
-  const [hideScoreForm, setHideScoreForm] = useState(false)
   const [highScores, setHighScores] = useState([])
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [loggedInUser, setLoggedInUser] = useState({})
   const [userScores, setUserScores] = useState([])
+  const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
 
   const config = {
     'Easy': {
@@ -111,7 +113,8 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      {scoreFormOpen === true ? <ScoreForm gameState={gameState} userScores={userScores} setUserScores={setUserScores} hideScoreForm={hideScoreForm} setHideScoreForm={setHideScoreForm} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm gameState={gameState} userScores={userScores} setUserScores={setUserScores} setScoreFormOpen={setScoreFormOpen} setOpenSnackbar={setOpenSnackbar} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+    <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />

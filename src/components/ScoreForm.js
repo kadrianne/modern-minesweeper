@@ -1,10 +1,8 @@
 import React, { useState,useEffect } from 'react'
 import { Button,Input } from '@material-ui/core'
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import Alert from './Alert'
-import useHandleSnackbar from '../hooks/handleSnackbar';
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import { withStyles } from '@material-ui/core/styles'
 
 const backendURL = 'http://localhost:4000'
 const styles = {
@@ -27,10 +25,9 @@ const styles = {
     }
   };
 
-function ScoreForm({ gameState,seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores,loggedInUser,userLoggedIn,hideScoreForm,setHideScoreForm,userScores,setUserScores }){
+function ScoreForm({ gameState,seconds,difficulty,classes,children,className,highScores,fetchHighScores,loggedInUser,userLoggedIn,setScoreFormOpen,setOpenSnackbar, userScores,setUserScores }){
 
     const [displayName, setDisplayName] = useState('')
-    const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
 
     const handleChange = (event) => {
         setDisplayName(event.target.value)
@@ -58,7 +55,7 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,clo
     const handleSubmit = (event) => {
         event.preventDefault()
         setOpenSnackbar(true)
-        setHideScoreForm(true) 
+        setScoreFormOpen(false) 
 
         const data = {display_name: displayName, time: seconds, difficulty: difficulty}
 
@@ -75,8 +72,7 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,clo
 
     return (
         <>
-        {hideScoreForm === true ? null
-        : <div className='submit-score'>
+        <div className='submit-score'>
             <h3>{userLoggedIn === true ? 'YOUR SCORE' : 'SUBMIT YOUR SCORE'}</h3>
             <form onSubmit={handleSubmit}>
             <label htmlFor='display-name'>DISPLAY NAME</label>
@@ -90,8 +86,7 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,clo
             <p>{difficulty}</p>
             {userLoggedIn === true ? null : <Button type='submit' className={clsx(classes.buttonRoot, className)}>Submit</Button>}
             </form>
-        </div>}
-            <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
+        </div>
         </>
     )
 }
