@@ -66,19 +66,13 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,hig
     }
     
     useEffect(() => {
-        if (gameState === 'won' && userLoggedIn === true && scoreSubmitted === true){
+        if (gameState === 'won' && userLoggedIn === true && scoreSubmitted === false){
             const data = {display_name: loggedInUser.display_name, time: seconds, difficulty: difficulty, user_id: loggedInUser.id}
             postScore(data)
             setUserScores([...userScores,seconds])
         }
         return setScoreSubmitted(false)
     },[loggedInUser])
-
-    useEffect(() => {
-        if (gameState === 'new') {
-            return setScoreSubmitted(false)
-        } 
-    },[gameState])
 
     return (
         <>
