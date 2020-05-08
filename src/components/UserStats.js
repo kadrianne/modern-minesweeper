@@ -29,6 +29,7 @@ export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUser
         setUserLoggedIn(false)
         setUserLoggedOut(true)
         setLoggedInUser({})
+        setUserScores([])
     }
 
     useEffect(() => {
