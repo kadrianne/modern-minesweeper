@@ -22,6 +22,7 @@ function App() {
   const [highScores, setHighScores] = useState([])
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [loggedInUser, setLoggedInUser] = useState({})
+  const [userScores, setUserScores] = useState([])
 
   const config = {
     'Easy': {
@@ -84,7 +85,7 @@ function App() {
 
   useEffect(() => {
     fetchHighScores()
-  },[])
+  })
   
   return (
     <>
@@ -110,11 +111,11 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      {scoreFormOpen === true ? <ScoreForm gameState={gameState} hideScoreForm={hideScoreForm} setHideScoreForm={setHideScoreForm} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm gameState={gameState} userScores={userScores} setUserScores={setUserScores} hideScoreForm={hideScoreForm} setHideScoreForm={setHideScoreForm} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <UserContainer userScores={userScores} setUserScores={setUserScores} difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
     </div>
     </>
   )

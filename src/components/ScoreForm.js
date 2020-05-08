@@ -27,7 +27,7 @@ const styles = {
     }
   };
 
-function ScoreForm({ gameState,seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores,loggedInUser,userLoggedIn,hideScoreForm,setHideScoreForm }){
+function ScoreForm({ gameState,seconds,difficulty,classes,children,className,closeScoreForm,highScores,fetchHighScores,loggedInUser,userLoggedIn,hideScoreForm,setHideScoreForm,userScores,setUserScores }){
 
     const [displayName, setDisplayName] = useState('')
     const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
@@ -69,6 +69,7 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,clo
         if (gameState === 'won' && userLoggedIn === true){
             const data = {display_name: loggedInUser.display_name, time: seconds, difficulty: difficulty, user_id: loggedInUser.id}
             postScore(data)
+            setUserScores([...userScores,seconds])
         }
     },[loggedInUser])
 

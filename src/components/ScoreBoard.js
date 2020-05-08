@@ -4,7 +4,7 @@ export default function ScoreBoard({ highScores,difficulty }){
 
     const renderHighScores = () => {
         return highScores.map(score => {
-            return <li>{score.display_name} ≫ <span class='stat'>{score.time}s</span></li>
+            return <li>{score.display_name} ≫ <span className='stat'>{score.time}s</span></li>
         })
     }
 

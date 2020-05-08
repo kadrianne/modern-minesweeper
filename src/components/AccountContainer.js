@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import AccountForm from './AccountForm'
 import Alert from './Alert'
-import UserStats from './UserStats'
 import useHandleDialog from '../hooks/handleDialog'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
@@ -89,7 +88,7 @@ export default function UserContainer({ setUserLoggedIn,setLoggedInUser }){
             <Button variant="outlined" color="primary" onClick={handleRegisterClick}>
                 REGISTER
             </Button>
-            <p>TO VIEW AND SAVE YOUR SCORES</p>
+            <p>TO VIEW STATS AND SAVE YOUR SCORES</p>
         </section>
         <AccountForm title='REGISTER' content='Create an account.' open={openRegisterForm} handleClose={handleRegisterClose} handleSubmit={handleRegisterSubmit} />
         <AccountForm title='LOGIN' content='Login to save and view your scores.' open={openLoginForm} handleClose={handleLoginClose} handleSubmit={handleLoginSubmit} />
