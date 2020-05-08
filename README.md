@@ -28,16 +28,24 @@ On right click of a cell, the cell will be flagged and the flag counter will be 
 
 On click of a mine, the game is lost indicated by the crying face emoji on the Game Button and 'YOU LOSE' appearing below the board. All of the mines are revealed on the board with the mine clicked in red.
 
+![game-loss](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588963539/minesweeper/loss.gif)
+
 ### Game Win
 
 The game is won when all non-mine cells are revealed. All of the unrevealed mine cells will be automatically flagged. The Game Button emoji will change to an emoji face with sunglasses and 'YOU WIN' will appear below the board as well as your score information to be posted.
 
-
+![game-win](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588964201/minesweeper/win.gif)
 
 
 ### Account Features
 
+A user can create an account or login with an existing account. With an account a user can see their statistics of fastest time, average time, and number of games won. While a user is logged in, on win of a game, their score will automatically be save and their statistics updated. Validation is also setup for existing usernames on account creation and incorrect username or password on login.
 
+![account](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1588964874/minesweeper/account.gif)
+
+### High Scores
+
+The high scores are retrieved from saved scores in the database. The top 10 scores for the selected difficulty level are shown. If a new score is posted that is one of the top 10 scores, the Scoreboard will automatically update with the posted score.
 
 ## Challenges
 
