@@ -251,7 +251,7 @@ img {
 }
 
 .revealed {
-  border-width: 1px 1px 0px 0px;
+  border-width: 1px 0px 0px 1px;
   border-style: solid;
   border-color: linen;
   background-color: rgb(199, 228, 247);
@@ -307,7 +307,7 @@ p {
   margin: 5px;
   font-size: 16px;
   font-weight: 400;
-  color: #ff3a3a
+  color: #11a0bd;
 }
 
 ol {
@@ -334,7 +334,7 @@ ul {
 
 .stat {
   font-weight: 400;
-  color: #ff3a3a;
+  color: #11a0bd;
 }
 
 .login-text {
