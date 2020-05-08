@@ -118,7 +118,7 @@ function App() {
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer userScores={userScores} setUserScores={setUserScores} difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <UserContainer userScores={userScores} setUserScores={setUserScores} setScoreFormOpen={setScoreFormOpen} difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
     </div>
     </>
   )
