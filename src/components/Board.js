@@ -109,7 +109,7 @@ export default class Board extends React.Component {
         return this.state.boardValues.map(row => {
             x++
             let y = -1
-            return row.map(cell => {
+            return row.map((cell,index) => {
                 y++
                 const cellClass = {
                     '💣': 'bomb',
@@ -125,6 +125,7 @@ export default class Board extends React.Component {
                 }
                 return (
                     <Cell 
+                        key={index}
                         x={x}
                         y={y}
                         value={cell}

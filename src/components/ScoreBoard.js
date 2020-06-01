@@ -3,8 +3,8 @@ import React from 'react'
 export default function ScoreBoard({ highScores,difficulty }){
 
     const renderHighScores = () => {
-        return highScores.map(score => {
-            return <li>{score.display_name} ≫ <span className='stat'>{score.time}s</span></li>
+        return highScores.map((score,index) => {
+            return <li key={index}>{score.display_name} ≫ <span className='stat'>{score.time}s</span></li>
         })
     }
 

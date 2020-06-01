@@ -65,7 +65,7 @@ export default class Cell extends React.Component {
                 onClick={this.props.gameState === 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
                 onContextMenu={this.props.gameState === 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
             >
-                {this.props.flagged === true ? <div class='flag'>❗</div> : null}
+                {this.props.flagged === true ? <div className='flag'>❗</div> : null}
                 {this.showValue()}
             </div>
         )
