@@ -7,14 +7,14 @@ import { withStyles } from '@material-ui/core/styles'
 const backendURL = 'http://localhost:4000'
 const styles = {
     buttonRoot: {
-      background: '#a675cb',
-      borderRadius: 1,
-      color: '#faf0e6',
-      height: 40,
-      width: 80,
-      margin: 10,
-      '&:hover': {
-          background: 'hsl(190,80%,50%)',
+    background: '#a675cb',
+    borderRadius: 1,
+    color: '#faf0e6',
+    height: 40,
+    width: 80,
+    margin: 10,
+    '&:hover': {
+        background: 'hsl(190,80%,50%)',
         }
     },
     inputRoot: {
@@ -23,9 +23,9 @@ const styles = {
             borderBottom: '2px solid hsl(190,80%,50%)'
         }
     }
-  };
+}
 
-function ScoreForm({ gameState,seconds,difficulty,classes,children,className,highScores,fetchHighScores,loggedInUser,userLoggedIn,scoreSubmitted,setScoreSubmitted,setScoreFormOpen,setOpenSnackbar, userScores,setUserScores }){
+function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,loggedInUser,userLoggedIn,scoreSubmitted,setScoreSubmitted,setScoreFormOpen,setOpenSnackbar,userScores,setUserScores }){
 
     const [displayName, setDisplayName] = useState('')
 
@@ -33,6 +33,13 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,hig
         setDisplayName(event.target.value)
     }
 
+    const checkIfHighScore = (time) => {
+        const isHighScore = highScores.find(score => time <= score.time)
+        if (highScores.length < 10 || isHighScore ){
+            fetchHighScores()
+        }
+    }
+    
     const postScore = (data) => {
         fetch(`${backendURL}/scores`, {
             method: 'POST',
@@ -46,13 +53,6 @@ function ScoreForm({ gameState,seconds,difficulty,classes,children,className,hig
                 setScoreSubmitted(true)
                 checkIfHighScore(results.score[0].time)
             })
-    }
-
-    const checkIfHighScore = (time) => {
-        const isHighScore = highScores.find(score => time <= score.time)
-        if (highScores.length < 10 || isHighScore ){
-            fetchHighScores()
-        }
     }
 
     const handleSubmit = (event) => {
@@ -99,6 +99,6 @@ ScoreForm.propTypes = {
     children: PropTypes.node,
     classes: PropTypes.object.isRequired,
     className: PropTypes.string,
-  };
-  
-  export default withStyles(styles)(ScoreForm);
+}
+
+export default withStyles(styles)(ScoreForm)
