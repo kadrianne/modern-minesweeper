@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import AccountForm from './AccountForm'
 import Alert from './Alert'
@@ -7,7 +8,9 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = 'http://localhost:4000'
 
-export default function UserContainer({ setUserLoggedIn,setLoggedInUser }){
+export default function UserContainer(){
+
+    const dispatch = useDispatch()
     const [openRegisterForm,setOpenRegisterForm,handleRegisterClick,handleRegisterClose] = useHandleDialog()
     const [openLoginForm,setOpenLoginForm,handleLoginClick,handleLoginClose] = useHandleDialog()
     const [
@@ -27,8 +30,7 @@ export default function UserContainer({ setUserLoggedIn,setLoggedInUser }){
             setOpenLoginForm(false)
             if (response.token){
                 localStorage.setItem('token', response.token)
-                setUserLoggedIn(true)
-                setLoggedInUser(response.payload)
+                dispatch({type: 'LOG_IN', user: response.payload})
             }
         } else if (response.status.match(/^40/)){
             setAlertSeverity('error')

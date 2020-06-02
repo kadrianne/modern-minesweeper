@@ -21,11 +21,11 @@ function App() {
   const [timerOn, setTimerOn] = useState(false)
   const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
-  const [loggedInUser, setLoggedInUser] = useState({})
   const [userScores, setUserScores] = useState([])
   const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
   const [scoreSubmitted, setScoreSubmitted] = useState(false)
+
+
 
   const config = {
     'Easy': {
@@ -115,12 +115,12 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      {scoreFormOpen === true ? <ScoreForm gameState={gameState} userScores={userScores} setUserScores={setUserScores} scoreSubmitted={scoreSubmitted} setScoreSubmitted={setScoreSubmitted} setScoreFormOpen={setScoreFormOpen} setOpenSnackbar={setOpenSnackbar} loggedInUser={loggedInUser} userLoggedIn={userLoggedIn} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm gameState={gameState} userScores={userScores} setUserScores={setUserScores} scoreSubmitted={scoreSubmitted} setScoreSubmitted={setScoreSubmitted} setScoreFormOpen={setScoreFormOpen} setOpenSnackbar={setOpenSnackbar} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer userScores={userScores} setUserScores={setUserScores} setScoreFormOpen={setScoreFormOpen} difficulty={difficulty} userLoggedIn={userLoggedIn} setUserLoggedIn={setUserLoggedIn} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+      <UserContainer userScores={userScores} setUserScores={setUserScores} setScoreFormOpen={setScoreFormOpen} difficulty={difficulty} />
     </div>
     </>
   )

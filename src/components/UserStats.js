@@ -1,12 +1,16 @@
 import React, { useState,useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Alert from './Alert'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = `http://localhost:4000`
 
-export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUserLoggedIn,setLoggedInUser,setUserLoggedOut,userScores,setUserScores }){
+export default function UserStats({ difficulty,setUserLoggedOut,userScores,setUserScores }){
 
+    const dispatch = useDispatch()
+    const userLoggedIn = useSelector(state => state.userLoggedIn)
+    const loggedInUser = useSelector(state => state.loggedInUser)
     const [fastestTime, setFastestTime] = useState(0)
     const [averageTime, setAverageTime] = useState(0)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
@@ -26,9 +30,8 @@ export default function UserStats({ difficulty,userLoggedIn,loggedInUser,setUser
     }
 
     const logout = () => {
-        setUserLoggedIn(false)
+        dispatch({type: 'LOG_OUT'})
         setUserLoggedOut(true)
-        setLoggedInUser({})
         setUserScores([])
     }
 
