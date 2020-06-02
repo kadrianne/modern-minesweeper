@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Button,Input } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
@@ -25,9 +26,11 @@ const styles = {
     }
 }
 
-function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,loggedInUser,userLoggedIn,scoreSubmitted,setScoreSubmitted,setScoreFormOpen,setOpenSnackbar,userScores,setUserScores }){
+function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,scoreSubmitted,setScoreSubmitted,setScoreFormOpen,setOpenSnackbar,userScores,setUserScores }){
 
     const [displayName, setDisplayName] = useState('')
+    const userLoggedIn = useSelector(state => state.userLoggedIn)
+    const loggedInUser = useSelector(state => state.loggedInUser)
 
     const handleChange = (event) => {
         setDisplayName(event.target.value)
