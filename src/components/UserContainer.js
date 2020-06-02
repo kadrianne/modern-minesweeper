@@ -8,11 +8,11 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 export default function UserContainer({ difficulty,setScoreFormOpen,userScores,setUserScores }){
 
     const userLoggedIn = useSelector(state => state.userLoggedIn)
-    const [userLoggedOut, setUserLoggedOut] = useState(false)
+    // const [userLoggedOut, setUserLoggedOut] = useState(false)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
 
     useEffect(() => {
-        if (userLoggedOut === true){
+        if (userLoggedIn === false){
             setOpenSnackbar(true)
             setScoreFormOpen(false)
         }
@@ -22,9 +22,9 @@ export default function UserContainer({ difficulty,setScoreFormOpen,userScores,s
         <>
         {userLoggedIn === false
         ? <AccountContainer /> 
-        : <UserStats difficulty={difficulty} userScores={userScores} setUserScores={setUserScores} setUserLoggedOut={setUserLoggedOut} />
+        : <UserStats difficulty={difficulty} userScores={userScores} setUserScores={setUserScores} />
         }
-        {userLoggedOut === true ? <Alert message='User successfully logged out.' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} /> : null}
+        {userLoggedIn === false ? <Alert message='User successfully logged out.' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} /> : null}
         </>
     )
 }

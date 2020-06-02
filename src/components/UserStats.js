@@ -6,7 +6,7 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = `http://localhost:4000`
 
-export default function UserStats({ difficulty,setUserLoggedOut,userScores,setUserScores }){
+export default function UserStats({ difficulty,userScores,setUserScores }){
 
     const dispatch = useDispatch()
     const userLoggedIn = useSelector(state => state.userLoggedIn)
@@ -31,13 +31,11 @@ export default function UserStats({ difficulty,setUserLoggedOut,userScores,setUs
 
     const logout = () => {
         dispatch({type: 'LOG_OUT'})
-        setUserLoggedOut(true)
         setUserScores([])
     }
 
     useEffect(() => {
         if (userLoggedIn === true){
-            setUserLoggedOut(false)
             setOpenSnackbar(true)
             getUsersScores()
         }
