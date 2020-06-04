@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import AccountContainer from './AccountContainer'
 import UserStats from './UserStats'
@@ -8,15 +8,15 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 export default function UserContainer({ difficulty,setScoreFormOpen,userScores,setUserScores }){
 
     const userLoggedIn = useSelector(state => state.userLoggedIn)
-    // const [userLoggedOut, setUserLoggedOut] = useState(false)
+    const userLoggedOut = useSelector(state => state.userLoggedOut)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
 
     useEffect(() => {
-        if (userLoggedIn === false){
+        if (userLoggedOut === true){
             setOpenSnackbar(true)
             setScoreFormOpen(false)
         }
-    },[userLoggedIn])
+    },[userLoggedOut])
 
     return (
         <>
