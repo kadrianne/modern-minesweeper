@@ -1,6 +1,6 @@
-import React, { useState,useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { Button,Input } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Button, Input } from '@material-ui/core'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles'
@@ -26,8 +26,9 @@ const styles = {
     }
 }
 
-function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,scoreSubmitted,setScoreSubmitted,setScoreFormOpen,setOpenSnackbar,userScores,setUserScores }){
+function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,setScoreFormOpen,setOpenSnackbar }){
 
+    const dispatch = useDispatch()
     const [displayName, setDisplayName] = useState('')
     const userLoggedIn = useSelector(state => state.userLoggedIn)
     const loggedInUser = useSelector(state => state.loggedInUser)
@@ -42,6 +43,17 @@ function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,f
             fetchHighScores()
         }
     }
+
+    const getUsersScores = () => {
+        fetch(`${backendURL}/users/scores`, {
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${localStorage.token}`
+            }
+        }).then(response => response.json())
+            .then(user => dispatch({ type: 'SET_SCORES', scores: user.scores.map(score => score.time) }))
+    }
     
     const postScore = (data) => {
         fetch(`${backendURL}/scores`, {
@@ -53,8 +65,8 @@ function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,f
             body: JSON.stringify(data)
         }).then(response => response.json())
             .then(results => {
-                setScoreSubmitted(true)
                 checkIfHighScore(results.score[0].time)
+                getUsersScores()
             })
     }
 
@@ -69,13 +81,11 @@ function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,f
     }
     
     useEffect(() => {
-        if (gameState === 'won' && userLoggedIn === true && scoreSubmitted === false){
+        if (gameState === 'won' && userLoggedIn === true){
             const data = {display_name: loggedInUser.display_name, time: seconds, difficulty: difficulty, user_id: loggedInUser.id}
             postScore(data)
-            setUserScores([...userScores,seconds])
         }
-        return setScoreSubmitted(false)
-    },[loggedInUser])
+    },[userLoggedIn])
 
     return (
         <>
