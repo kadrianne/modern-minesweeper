@@ -5,7 +5,7 @@ import UserStats from './UserStats'
 import Alert from './Alert'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
-export default function UserContainer({ difficulty,setScoreFormOpen,userScores,setUserScores }){
+export default function UserContainer({ difficulty,setScoreFormOpen,gameState }){
 
     const userLoggedIn = useSelector(state => state.userLoggedIn)
     const userLoggedOut = useSelector(state => state.userLoggedOut)
@@ -22,7 +22,7 @@ export default function UserContainer({ difficulty,setScoreFormOpen,userScores,s
         <>
         {userLoggedIn === false
         ? <AccountContainer /> 
-        : <UserStats difficulty={difficulty} userScores={userScores} setUserScores={setUserScores} />
+        : <UserStats difficulty={difficulty} gameState={gameState} />
         }
         {userLoggedIn === false ? <Alert message='User successfully logged out.' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} /> : null}
         </>
