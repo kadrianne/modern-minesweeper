@@ -6,11 +6,12 @@ import useHandleSnackbar from '../hooks/handleSnackbar'
 
 const backendURL = `http://localhost:4000`
 
-export default function UserStats({ difficulty,userScores,setUserScores }){
+export default function UserStats({ difficulty, gameState }){
 
     const dispatch = useDispatch()
     const userLoggedIn = useSelector(state => state.userLoggedIn)
     const loggedInUser = useSelector(state => state.loggedInUser)
+    const userScores = useSelector(state => state.userScores)
     const [fastestTime, setFastestTime] = useState(0)
     const [averageTime, setAverageTime] = useState(0)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
@@ -26,21 +27,22 @@ export default function UserStats({ difficulty,userScores,setUserScores }){
                 'Authorization': `Bearer ${localStorage.token}`
             }
         }).then(response => response.json())
-            .then(user => setUserScores(user.scores.map(score => score.time)))
+            .then(user => dispatch({ type: 'SET_SCORES', scores: user.scores.map(score => score.time) }))
     }
 
     const logout = () => {
         dispatch({type: 'LOG_OUT'})
-        setUserScores([])
     }
 
     useEffect(() => {
         if (userLoggedIn === true){
             setOpenSnackbar(true)
-            getUsersScores()
+            if (gameState !== 'won'){
+                getUsersScores()
+            }
         }
     },[userLoggedIn])
-    
+
     useEffect(() => {
         if (userScores.length > 0){
             getFastestTime()
