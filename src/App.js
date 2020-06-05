@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
@@ -21,9 +21,10 @@ function App() {
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
-  const [scoreFormOpen, setScoreFormOpen] = useState(false)
+  // const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
   const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
+  const scoreFormOpen = useSelector(state => state.scoreFormOpen)
 
   const config = {
     'Easy': {
@@ -49,7 +50,6 @@ function App() {
     setNewGame(false)
     setGameState('new')
     setFlagsMarked(0)
-    setScoreFormOpen(false)
     dispatch({ type: 'RESET' })
   }
 
@@ -75,7 +75,7 @@ function App() {
   useEffect(() => {
       stopTimer()
       if (gameState === 'won') {
-        setScoreFormOpen(true)
+        dispatch({ type: 'OPEN_FORM' })
       }
   }, [gameState])
 
@@ -113,12 +113,12 @@ function App() {
         />
       </div>
       <h2 className={gameState}>{displayText()}</h2>
-      {scoreFormOpen === true ? <ScoreForm gameState={gameState} setScoreFormOpen={setScoreFormOpen} setOpenSnackbar={setOpenSnackbar} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
+      {scoreFormOpen === true ? <ScoreForm setOpenSnackbar={setOpenSnackbar} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
     <Alert message='Score Posted!' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />
     </div>
     <div className='right-container'>
       <ScoreBoard highScores={highScores} difficulty={difficulty} />
-      <UserContainer setScoreFormOpen={setScoreFormOpen} difficulty={difficulty} gameState={gameState} />
+      <UserContainer difficulty={difficulty} gameState={gameState} />
     </div>
     </>
   )

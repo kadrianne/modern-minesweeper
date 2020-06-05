@@ -26,7 +26,7 @@ const styles = {
     }
 }
 
-function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,fetchHighScores,setScoreFormOpen,setOpenSnackbar }){
+function ScoreForm({ seconds,difficulty,classes,className,highScores,fetchHighScores,scoreFormOpen,setScoreFormOpen,setOpenSnackbar }){
 
     const dispatch = useDispatch()
     const [displayName, setDisplayName] = useState('')
@@ -66,14 +66,16 @@ function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,f
         }).then(response => response.json())
             .then(results => {
                 checkIfHighScore(results.score[0].time)
-                getUsersScores()
+                if (userLoggedIn === true){
+                    getUsersScores()
+                }
             })
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
         setOpenSnackbar(true)
-        setScoreFormOpen(false) 
+        dispatch({ type: 'CLOSE_FORM' })
 
         const data = {display_name: displayName, time: seconds, difficulty: difficulty}
 
@@ -81,7 +83,7 @@ function ScoreForm({ gameState,seconds,difficulty,classes,className,highScores,f
     }
     
     useEffect(() => {
-        if (gameState === 'won' && userLoggedIn === true){
+        if (userLoggedIn === true){
             const data = {display_name: loggedInUser.display_name, time: seconds, difficulty: difficulty, user_id: loggedInUser.id}
             postScore(data)
         }
