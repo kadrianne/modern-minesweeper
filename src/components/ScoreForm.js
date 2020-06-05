@@ -26,7 +26,7 @@ const styles = {
     }
 }
 
-function ScoreForm({ seconds,difficulty,classes,className,highScores,fetchHighScores,scoreFormOpen,setScoreFormOpen,setOpenSnackbar }){
+function ScoreForm({ seconds,difficulty,classes,className,highScores,fetchHighScores,setOpenSnackbar }){
 
     const dispatch = useDispatch()
     const [displayName, setDisplayName] = useState('')
