@@ -12,6 +12,7 @@ export default function UserStats({ difficulty, gameState }){
     const userLoggedIn = useSelector(state => state.userLoggedIn)
     const loggedInUser = useSelector(state => state.loggedInUser)
     const userScores = useSelector(state => state.userScores)
+    const scoreFormOpen = useSelector(state => state.scoreFormOpen)
     const [fastestTime, setFastestTime] = useState(0)
     const [averageTime, setAverageTime] = useState(0)
     const [openSnackbar,setOpenSnackbar,handleClose] = useHandleSnackbar()
@@ -37,7 +38,7 @@ export default function UserStats({ difficulty, gameState }){
     useEffect(() => {
         if (userLoggedIn === true){
             setOpenSnackbar(true)
-            if (gameState !== 'won'){
+            if (scoreFormOpen === false){
                 getUsersScores()
             }
         }
