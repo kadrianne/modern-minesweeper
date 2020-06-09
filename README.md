@@ -3,6 +3,7 @@
 A refreshed take on the classic Minesweeper computer game. The game is reskinned with fun colors and emojis and has the same basic gameplay.
 
 Backend respository: https://github.com/kadrianne/minesweeper-express-backend
+<br>[Demo Video](https://www.loom.com/share/82baf2309ffc461eb1ae945ea4587479)
 
 
 ## Built With
