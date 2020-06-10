@@ -10,7 +10,7 @@ import UserContainer from './components/UserContainer'
 import Alert from './components/Alert'
 import useHandleSnackbar from './hooks/handleSnackbar'
 
-const backendURL = 'https://minesweeper-backend.herokuapp.com/'
+const backendURL = 'https://minesweeper-backend.herokuapp.com'
 
 function App() {
 
@@ -21,7 +21,6 @@ function App() {
   const [flagsMarked, setFlagsMarked] = useState(0)
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
-  // const [scoreFormOpen, setScoreFormOpen] = useState(false)
   const [highScores, setHighScores] = useState([])
   const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
   const scoreFormOpen = useSelector(state => state.scoreFormOpen)

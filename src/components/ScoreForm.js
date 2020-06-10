@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { withStyles } from '@material-ui/core/styles'
 
-const backendURL = 'https://minesweeper-backend.herokuapp.com/'
+const backendURL = 'https://minesweeper-backend.herokuapp.com'
 const styles = {
     buttonRoot: {
     background: '#a675cb',
