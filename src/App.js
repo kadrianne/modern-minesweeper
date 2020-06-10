@@ -10,7 +10,7 @@ import UserContainer from './components/UserContainer'
 import Alert from './components/Alert'
 import useHandleSnackbar from './hooks/handleSnackbar'
 
-const backendURL = 'http://localhost:4000'
+const backendURL = 'https://minesweeper-backend.herokuapp.com/'
 
 function App() {
 

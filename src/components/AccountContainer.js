@@ -6,7 +6,7 @@ import Alert from './Alert'
 import useHandleDialog from '../hooks/handleDialog'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
-const backendURL = 'http://localhost:4000'
+const backendURL = 'https://minesweeper-backend.herokuapp.com/'
 
 export default function UserContainer(){
 

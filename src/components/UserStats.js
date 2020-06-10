@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import Alert from './Alert'
 import useHandleSnackbar from '../hooks/handleSnackbar'
 
-const backendURL = `http://localhost:4000`
+const backendURL = `https://minesweeper-backend.herokuapp.com/`
 
 export default function UserStats({ difficulty, gameState }){
 
