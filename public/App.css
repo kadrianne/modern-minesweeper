@@ -223,7 +223,7 @@ label {
   box-sizing: border-box;
   border: 1px outset hsl(190,80%,50%);
   margin: 5px 0px;
-  font-size: 15px;
+  font-size: 23px;
 }
 
 .board {
