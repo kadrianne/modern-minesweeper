@@ -1,4 +1,5 @@
 import React from 'react'
+import flag from '../assets/flag.svg'
 
 export default class Cell extends React.Component {
     state = {
@@ -65,7 +66,7 @@ export default class Cell extends React.Component {
                 onClick={this.props.gameState === 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
                 onContextMenu={this.props.gameState === 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
             >
-                {this.props.flagged === true ? <div className='flag'>❗</div> : null}
+                {this.props.flagged === true ? <input type='image' src={flag} /> : null}
                 {this.showValue()}
             </div>
         )

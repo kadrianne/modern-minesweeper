@@ -251,6 +251,11 @@ img {
   padding: 2px;
 }
 
+.flag-emoji {
+  width: 24px;
+  height: 24px;
+}
+
 .revealed {
   border-width: 1px 0px 0px 1px;
   border-style: solid;
@@ -327,10 +332,6 @@ ul {
   font-size: 16px;
   font-weight: 300;
   text-align: left;
-}
-
-.flag {
-  margin-top: 5px;
 }
 
 .stat {

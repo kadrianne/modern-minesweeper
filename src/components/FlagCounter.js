@@ -1,4 +1,5 @@
 import React from 'react'
+import flag from '../assets/flag.svg'
 
 export default function FlagCounter({ difficulty,flagsMarked}){
 
@@ -8,7 +9,7 @@ export default function FlagCounter({ difficulty,flagsMarked}){
 
     return (
         <div className='flag-counter'>
-            <span>❗️</span> { totalMines[difficulty] - flagsMarked }
+            <img class='flag-emoji' src={flag} /> { totalMines[difficulty] - flagsMarked }
         </div>
     )
 }
