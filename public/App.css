@@ -224,6 +224,7 @@ label {
   border: 1px outset hsl(190,80%,50%);
   margin: 5px 0px;
   font-size: 23px;
+  padding: 3px;
 }
 
 .board {
