@@ -66,19 +66,23 @@ body {
   height: 100vh;
 }
 
+.left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
 @media screen and (max-width: 1024px) {
   #root {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
   }
-}
 
-.left-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
+  .left-container {
+    width: 100vw;
+  }
 }
 
 h1 {
@@ -95,11 +99,7 @@ h2 {
   font-family: 'Raleway', sans-serif;
 }
 
-@media screen and (max-width: 415px) {
-  .left-container {
-    width: 100vw;
-  }
-
+@media screen and (max-width: 475px) {
   h1, h2 {
     font-size: 30px;
   }
