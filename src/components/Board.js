@@ -55,7 +55,6 @@ export default class Board extends React.Component {
 
         flagsBoard[x][y] = flaggedState
 
-        // this.setState({flagsBoard})
         this.countFlagsMarked()
     }
 
@@ -144,7 +143,7 @@ export default class Board extends React.Component {
             })
         })
     }
- 
+
     createBoard = (rows,columns) => {
         let board = []
 
@@ -228,7 +227,7 @@ export default class Board extends React.Component {
         }
     }
 
-    componentDidUpdate(previousProps,previousState){
+    componentDidUpdate(){
         if (this.props.gameState !== 'won'){
             this.checkForWin()
         }

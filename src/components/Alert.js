@@ -21,9 +21,6 @@ export default function CustomizedSnackbars(props) {
 
   return (
     <div className={classes.root}>
-      {/* <Button variant="outlined" onClick={handleClick}>
-        Open success snackbar
-      </Button> */}
       <Snackbar open={props.openSnackbar} autoHideDuration={3000} onClose={props.handleClose}>
         <Alert onClose={props.handleClose} severity={props.severity}>
           {props.message}
