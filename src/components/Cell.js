@@ -32,7 +32,7 @@ export default class Cell extends React.Component {
     showValue = () => {
         return (
             (this.props.revealed === true)
-            ? <span className={this.props.iconClass}>{this.props.value === '💣' ? <img src='../bomb.png' alt='bomb-emoji'/> : this.props.value}</span> 
+            ? <span className={this.props.iconClass}>{this.props.value === '💣' ? <img className='bomb' src='../bomb.png' alt='bomb-emoji'/> : this.props.value}</span> 
             : null
         )
     }
