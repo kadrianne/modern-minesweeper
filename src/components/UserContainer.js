@@ -23,7 +23,7 @@ export default function UserContainer({ difficulty,gameState }){
         ? <AccountContainer /> 
         : <UserStats difficulty={difficulty} gameState={gameState} />
         }
-        {userLoggedIn === false ? <Alert message='User successfully logged out.' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} /> : null}
+        {userLoggedIn === false && <Alert message='User successfully logged out.' severity='success' handleClose={handleClose} openSnackbar={openSnackbar} />}
         </>
     )
 }

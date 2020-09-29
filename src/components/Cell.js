@@ -43,30 +43,14 @@ export default class Cell extends React.Component {
         }
     }
 
-    // pressedCell = (event) => {
-    //     if (event.nativeEvent.which === 1){
-    //         return this.setState({
-    //             classNames: 'cell revealed'
-    //         })
-    //     }
-    // }
-
-    // resetCell = () => {
-    //     return this.setState({
-    //         classNames: 'cell'
-    //     })
-    // }
-
     render(){
         return (
             <div className={`cell ${this.props.revealed === true ? `revealed` : ''} ${this.state.bombClicked === true ? `bomb` : ''}`}
                 id={`${this.props.x}-${this.props.y}`}
-                // onMouseDown={this.state.flagged === true ? null : this.pressedCell}
-                // onMouseOut={this.props.gameState !== 'lost' ? this.props.revealed === true ? null : this.resetCell : null}
-                onClick={this.props.gameState === 'new' ? this.props.flagged === true ? null : this.clickedCell : null}
-                onContextMenu={this.props.gameState === 'new' ? this.props.revealed === true ? null : this.clickedCell : null}
+                onClick={this.props.gameState === 'new' && this.props.flagged !== true && this.clickedCell}
+                onContextMenu={this.props.gameState === 'new' && this.props.revealed !== true && this.clickedCell}
             >
-                {this.props.flagged === true ? <input type='image' src={flag} /> : null}
+                {this.props.flagged === true && <input type='image' src={flag} />}
                 {this.showValue()}
             </div>
         )
