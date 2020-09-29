@@ -47,8 +47,8 @@ export default class Cell extends React.Component {
         return (
             <div className={`cell ${this.props.revealed === true ? `revealed` : ''} ${this.state.bombClicked === true ? `bomb` : ''}`}
                 id={`${this.props.x}-${this.props.y}`}
-                onClick={this.props.gameState === 'new' && this.props.flagged !== true && this.clickedCell}
-                onContextMenu={this.props.gameState === 'new' && this.props.revealed !== true && this.clickedCell}
+                onClick={this.props.gameState === 'new' ? this.props.flagged !== true ? this.clickedCell : null : null}
+                onContextMenu={this.props.gameState === 'new' ? this.props.revealed !== true ? this.clickedCell : null : null}
             >
                 {this.props.flagged === true && <input type='image' src={flag} />}
                 {this.showValue()}

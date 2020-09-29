@@ -9,7 +9,7 @@ export default function FlagCounter({ difficulty,flagsMarked}){
 
     return (
         <div className='flag-counter'>
-            <img class='flag-emoji' src={flag} /> { totalMines[difficulty] - flagsMarked }
+            <img className='flag-emoji' src={flag} /> { totalMines[difficulty] - flagsMarked }
         </div>
     )
 }
