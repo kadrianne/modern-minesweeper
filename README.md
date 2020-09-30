@@ -59,7 +59,6 @@ Being able to reset the board ended up being the last main feature implemented a
 State management became very challenging as there are multiple states that needed to be shared between sibling components. So a lot of these states are currently being tracked in the parent App component and being passed down as props. Also, with conditional rendering of certain components, some Alert components had to be rendered in their parent components as well.
 
 ## Future Implementation
-- Deployment to production server
 - Create boards of increased difficulty (intermediate, hard)
 - Add keyboard controls
 - Implement Redux for state management
