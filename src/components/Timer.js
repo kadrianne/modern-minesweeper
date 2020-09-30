@@ -1,9 +1,9 @@
 import React from 'react'
-import timer from '../assets/timer.svg'
+import Twemoji from 'react-twemoji'
 
 export default function Timer(props){
 
     return (
-        <div className='timer'><img className='timer-emoji' src={timer} />{props.seconds}</div>
+        <div className='timer'><Twemoji options={{ className: 'emoji' }}><span>⏱</span></Twemoji>{props.seconds}</div>
     )
 }

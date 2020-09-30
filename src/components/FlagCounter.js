@@ -1,5 +1,5 @@
 import React from 'react'
-import flag from '../assets/flag.svg'
+import Twemoji from 'react-twemoji'
 
 export default function FlagCounter({ difficulty,flagsMarked}){
 
@@ -9,7 +9,7 @@ export default function FlagCounter({ difficulty,flagsMarked}){
 
     return (
         <div className='flag-counter'>
-            <img className='flag-emoji' src={flag} /> { totalMines[difficulty] - flagsMarked }
+            <Twemoji options={{ className: 'emoji' }}><span>🚩</span></Twemoji> { totalMines[difficulty] - flagsMarked }
         </div>
     )
 }

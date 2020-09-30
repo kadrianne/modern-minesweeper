@@ -1,5 +1,5 @@
 import React from 'react'
-import flag from '../assets/flag.svg'
+import Twemoji from 'react-twemoji'
 
 export default class Cell extends React.Component {
     state = {
@@ -50,7 +50,7 @@ export default class Cell extends React.Component {
                 onClick={this.props.gameState === 'new' ? this.props.flagged !== true ? this.clickedCell : null : null}
                 onContextMenu={this.props.gameState === 'new' ? this.props.revealed !== true ? this.clickedCell : null : null}
             >
-                {this.props.flagged === true && <input type='image' src={flag} />}
+                {this.props.flagged === true && <Twemoji options={{ className: 'flag-emoji' }}><span>🚩</span></Twemoji> }
                 {this.showValue()}
             </div>
         )

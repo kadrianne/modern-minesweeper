@@ -1,7 +1,5 @@
 import React from 'react'
-import smiling from '../assets/smiling.svg'
-import sunglasses from '../assets/sunglasses.svg'
-import crying from '../assets/crying.svg'
+import Twemoji from 'react-twemoji'
 
 export default function GameButton(props){
 
@@ -12,14 +10,14 @@ export default function GameButton(props){
 
     const displayEmoji = (gameState) => {
         const emojis = {
-            'new': smiling,
-            'won': sunglasses,
-            'lost': crying
+            'new': '🙂',
+            'won': '😎',
+            'lost': '😭'
         }
         return emojis[gameState]
     }
 
     return (
-        <input type='image' className='game-button' onClick={() => handleClick(props)} src={displayEmoji(props.gameState)} />
+        <button type='image' className='game-button' onClick={() => handleClick(props)}><Twemoji options={{ className: 'emoji' }}><span>{displayEmoji(props.gameState)}</span></Twemoji></button>
     )
 }
