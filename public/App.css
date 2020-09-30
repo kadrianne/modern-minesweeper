@@ -55,6 +55,9 @@ table {
 
 body {
   background-color: linen;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 #root {
@@ -62,8 +65,6 @@ body {
   justify-content: space-around;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  width: 100vw;
-  height: 100vh;
 }
 
 .left-container {
@@ -117,6 +118,7 @@ h4 {
   margin: 5px 0;
   font-size: 16px;
   font-weight: 500;
+  color: #000000;
 }
 
 header {
@@ -147,6 +149,22 @@ header {
   color: rgb(22, 154, 180);
   font-weight: 700;
   letter-spacing: -1px;
+}
+
+.emoji {
+  height: 18px;
+}
+
+.instructions {
+  margin-top: 25px;
+}
+
+.MuiPopover-paper {
+  width: 25%;
+}
+
+.popover-text {
+  line-height: 18px;
 }
 
 .won {
@@ -266,8 +284,8 @@ img.bomb {
 }
 
 .flag-emoji {
-  width: 24px;
-  height: 24px;
+  margin-top: 2px;
+  height: 14px;
 }
 
 .revealed {
