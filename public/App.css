@@ -155,6 +155,10 @@ header {
   height: 18px;
 }
 
+.timer-emoji {
+  height: 22px;
+}
+
 .instructions {
   margin-top: 25px;
 }
