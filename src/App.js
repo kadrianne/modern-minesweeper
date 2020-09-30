@@ -1,5 +1,10 @@
 import React, { useState,useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles, createMuiTheme } from '@material-ui/core/styles'
+import Popover from '@material-ui/core/Popover'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Twemoji from 'react-twemoji'
 import Board from './components/Board'
 import GameButton from './components/GameButton'
 import FlagCounter from './components/FlagCounter'
@@ -12,8 +17,28 @@ import useHandleSnackbar from './hooks/handleSnackbar'
 
 const backendURL = 'https://minesweeper-backend.herokuapp.com'
 
+const useStyles = makeStyles((theme) => ({
+  typography: {
+    padding: theme.spacing(2),
+  },
+}))
+
+const theme = createMuiTheme({
+  overrides: {
+    // Style sheet name ⚛️
+    MuiPopover: {
+      // Name of the rule
+      text: {
+        // Some CSS
+        color: 'white',
+      },
+    },
+  },
+})
+
 function App() {
 
+  const classes = useStyles()
   const dispatch = useDispatch()
   const [gameState, setGameState] = useState('new')
   const [newGame, setNewGame] = useState(false)
@@ -22,6 +47,7 @@ function App() {
   const [seconds,setSeconds] = useState(0)
   const [timerOn, setTimerOn] = useState(false)
   const [highScores, setHighScores] = useState([])
+  const [anchorEl, setAnchorEl] = useState(null)
   const [openSnackbar, setOpenSnackbar, handleClose] = useHandleSnackbar(false)
   const scoreFormOpen = useSelector(state => state.scoreFormOpen)
 
@@ -60,6 +86,17 @@ function App() {
 
     return text[gameState]
   }
+
+  const handlePopoverClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
 
   useEffect(() => {
     let interval = null
@@ -110,6 +147,33 @@ function App() {
           updateFlagsMarked={updateFlagsMarked}
           startTimer={startTimer}
         />
+      </div>
+      <div className='instructions'>
+        <Button className='play-button' variant='outlined' size='small' color='primary' aria-describedby={id} onClick={handlePopoverClick}>
+          How to Play
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handlePopoverClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <Typography className={classes.typography}>
+              <h4>TO PLAY:</h4>
+              <p className='popover-text'>Click on a cell to reveal. When a cell reveals a number, this number indicates the number of adjacent mines 💣</p>
+              <p className='popover-text'>Right click on a cell to flag a mine. </p>
+              <h4>TO WIN:</h4>
+              <p className='popover-text'>Reveal all the cells that do not contain mines!</p>
+          </Typography>
+        </Popover>
       </div>
       <h2 className={gameState}>{displayText()}</h2>
       {scoreFormOpen === true ? <ScoreForm setOpenSnackbar={setOpenSnackbar} fetchHighScores={fetchHighScores} highScores={highScores} seconds={seconds} difficulty={difficulty} /> : null}
